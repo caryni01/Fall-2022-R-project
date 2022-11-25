@@ -2,7 +2,9 @@
 title: "PLACES_data"
 author: "Cary Ni"
 date: "2022-11-15"
-output: html_document
+output: 
+  html_document:
+    code_folding: hide
 ---
 
 ```{r setup, include=FALSE}
@@ -30,6 +32,22 @@ scale_fill_discrete = scale_fill_viridis_d
 theme_set(theme_minimal() + theme(legend.position = "bottom"))
 ```
 
+### Interested physiological risk factors
+`ARTHRITIS`: Arthritis among adults aged >=18 Years\ 
+`BPHIGH`: High blood pressure among adults aged >=18 Years\   
+`CANCER`: Cancer (excluding skin cancer) among adults aged >=18 Years\ 
+`CASTHMA`: Asthma among adults aged >=18 Years\  
+`CHD`: Coronary heart disease among adults aged >=18 Years\   
+`COPD`: Chronic obstructive pulmonary diseases among adults aged >=18 Years\
+`DEPRESSION`: Depression among adults aged >=18 Years\
+`DIABETES`: Diagnosed diabetes among adults aged >=18 Years\
+`HIGHCHOL`: High cholesterol among adults aged >=18 Years who have been screened in the past 5 Years\
+`KIDNEY`: Chronic kidney disease among adults aged >=18 Years\
+`OBESITY`: Obesity among adults aged >=18 Years
+
+### Outcome measured
+`SLEEP`: Sleeping less than 7 hours among adults aged >=18 Years
+
 ## Select interested physiological diseases and sample state
 ```{r import_data}
 data_df = read_csv('PLACES__Census_Tract_Data__GIS_Friendly_Format___2022_release.csv') %>% 
@@ -41,24 +59,15 @@ data_df = read_csv('PLACES__Census_Tract_Data__GIS_Friendly_Format___2022_releas
          starts_with('highchol'), starts_with('kidney'), starts_with('obesity'),
          starts_with('sleep')) 
 
-state_summary = data_df %>% 
+data_df %>% 
   group_by(state_abbr) %>% 
   summarise(
-    n = n(),
+    number_of_regions = n(),
     population = sum(total_population)
   ) %>% 
-  arrange(-population)
+  arrange(-population) %>% 
+  head() %>% knitr::kable()
 ```
-
-
-## Behaviors
-```{r}
-ny_data_2 = 
-  data_df %>% 
-  filter(state_abbr == 'NY') %>% 
-  select(county_name, total_population, starts_with('binge'), starts_with('csmoking'), starts_with('lpa'), starts_with('sleep')) 
-```
-
 
 ## Extract NY state as target sample
 ```{r}
@@ -70,6 +79,9 @@ ny_data = data_df %>%
 ```
 
 ## Show the statistics of risk factors prevalence
+
+The following is a boxplot of the prevalences of all of the interested variables. The risk factors with highest prevalence involve screening and medication (HIGHCHOL, BPHIGH and OBESITY). The risk factors with the lowest prevlances are diseases (KIDNEY, CHD, COPD). There is also a general trend that risk factors with higher prevalences have higher variance. 
+
 ```{r}
 ny_data %>% select(-sleep) %>% 
   pivot_longer(
@@ -114,10 +126,8 @@ best_lambda = cv_object %>% broom::glance() %>% pull(lambda.min)
 elastic_model = glmnet(predictors, outcome, lambda = best_lambda, alpha = 0.5)
 model_coef = coef.glmnet(elastic_model) %>% as.matrix() %>% as.data.frame()
 model_coef[model_coef == 0] = NA
-# Extract all of the non-zero variables of elastic net model
-selected_var = model_coef %>% na.omit() %>% row.names()
-selected_var = selected_var[-1]
-
+plot(cv_object)
+model_coef 
 
 ```
 
@@ -139,8 +149,8 @@ par(mfrow = c(2, 2))
 plot(mlr_model_2)
 ```
 
-1.Residuals are normally distributed
-2.Variance of residuals is constant across the range of variables
+1.Residuals are normally distributed\
+2.Variance of residuals is constant across the range of variables\
 3.Residuals are independent of one another
 
 ```{r}
