@@ -1,0 +1,185 @@
+---
+title: "PLACES_data"
+author: "Cary Ni"
+date: "2022-11-15"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(glmnet)
+library(modelr)
+library(corrplot)
+knitr::opts_chunk$set(
+	echo = TRUE,
+	warning = FALSE,
+	message = FALSE,
+	fig.width = 8, 
+  fig.height = 6,
+  out.width = "90%"
+)
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+```
+
+## Select interested physiological diseases and sample state
+```{r import_data}
+data_df = read_csv('PLACES__Census_Tract_Data__GIS_Friendly_Format___2022_release.csv') %>% 
+  janitor::clean_names() %>% 
+  select(county_name,total_population, state_abbr, 
+         starts_with('arthritis'), starts_with('bphigh'), 
+         starts_with('cancer'), starts_with('casthma'), starts_with('chd'),
+         starts_with('copd'),starts_with('depression'), starts_with('diabetes'),
+         starts_with('highchol'), starts_with('kidney'), starts_with('obesity'),
+         starts_with('sleep')) 
+
+state_summary = data_df %>% 
+  group_by(state_abbr) %>% 
+  summarise(
+    n = n(),
+    population = sum(total_population)
+  ) %>% 
+  arrange(-population)
+```
+
+
+## Behaviors
+```{r}
+ny_data_2 = 
+  data_df %>% 
+  filter(state_abbr == 'NY') %>% 
+  select(county_name, total_population, starts_with('binge'), starts_with('csmoking'), starts_with('lpa'), starts_with('sleep')) 
+```
+
+
+## Extract NY state as target sample
+```{r}
+ny_data = data_df %>% 
+  filter(state_abbr == 'NY') %>% 
+  select(ends_with('prev')) %>% 
+  rename_with(~str_remove(., '_crude_prev'))
+
+```
+
+## Show the statistics of risk factors prevalence
+```{r}
+ny_data %>% select(-sleep) %>% 
+  pivot_longer(
+    everything(), 
+    names_to = "risk_factor",
+    values_to = "prevelance"
+  ) %>% 
+  ggplot(aes(x = reorder(risk_factor, -prevelance), y = prevelance, 
+             color = risk_factor)) + 
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1),
+        legend.position = "none") +
+  labs(
+      title = "Physiological risk Factor Prevalence in NY State 2020",
+      x = "Risk Factor",
+      y = "Prevalence (%)",
+      caption = "Data from the CDC"
+    ) + 
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+## Examine correlation
+```{r}
+par(mfrow = c(1, 1))
+ny_data %>% select(-sleep) %>% cor() %>% corrplot(
+  method = "circle", addCoef.col = "black", tl.col="black", tl.srt=90, 
+  insig = "blank", diag=FALSE, number.cex = .5)
+```
+
+## Build model with elastic net
+```{r}
+set.seed(2023)
+
+predictors = data.matrix(ny_data %>% select(-sleep))
+outcome = ny_data %>% pull(sleep)
+# 5 folds cv is used 
+cv_object = cv.glmnet(predictors, outcome, nfolds = 5)
+# Find the best lambda with lowest se
+best_lambda = cv_object %>% broom::glance() %>% pull(lambda.min)
+# build elastic net model
+elastic_model = glmnet(predictors, outcome, lambda = best_lambda, alpha = 0.5)
+model_coef = coef.glmnet(elastic_model) %>% as.matrix() %>% as.data.frame()
+model_coef[model_coef == 0] = NA
+# Extract all of the non-zero variables of elastic net model
+selected_var = model_coef %>% na.omit() %>% row.names()
+selected_var = selected_var[-1]
+
+
+```
+
+```{r}
+mlr_model_1 = lm(sleep ~ arthritis + bphigh + cancer + casthma + chd + copd + depression + diabetes + highchol + kidney + obesity, data = ny_data)
+
+mlr_model_2 = lm(sleep ~ arthritis  + bphigh + cancer + casthma + chd + copd + depression + diabetes + highchol + kidney, data = ny_data)
+
+anova(mlr_model_2, mlr_model_1)
+# Pseudo adjusted R squared of elastic model
+elastic_model %>% broom::tidy() %>% select(dev.ratio) %>% unique()
+
+```
+
+## Examine assumptions for MLR model
+
+```{r}
+par(mfrow = c(2, 2))
+plot(mlr_model_2)
+```
+
+1.Residuals are normally distributed
+2.Variance of residuals is constant across the range of variables
+3.Residuals are independent of one another
+
+```{r}
+# Use the data from the rest of states as test data
+nation_df = data_df %>% 
+  filter(state_abbr != 'NY') %>% 
+  select(state_abbr, ends_with('prev')) %>% 
+  rename_with(~str_remove(., '_crude_prev')) 
+
+nation_df_2 = nation_df %>% select(-c(state_abbr, sleep)) %>% data.matrix()
+ 
+predict_mlr = nation_df %>% add_predictions(mlr_model_2, var = "mlr_pred") %>% select(state_abbr, sleep, mlr_pred)
+
+predict_elastic = predict(elastic_model, nation_df_2) %>% as_tibble() %>% select(elas_pred = s0)
+
+result_mse = cbind(predict_mlr, predict_elastic) %>% 
+  mutate(
+    sse_mlr = (sleep - mlr_pred)^2,
+    sse_elas = (sleep - elas_pred)^2
+  ) %>% 
+  group_by(state_abbr) %>% 
+  summarise(
+    n = n(),
+    mse_mlr = sum(sse_mlr)/n,
+    mse_elas = sum(sse_elas)/n
+  ) %>% na.omit()
+
+result_mse %>% 
+  select(starts_with('mse')) %>% 
+  pivot_longer(
+    everything(), 
+    names_to = "model",
+    values_to = "mse",
+    names_prefix = "mse_"
+  ) %>% 
+  ggplot(aes(x = model, y = mse, fill = model)) + 
+  geom_violin() +
+  geom_jitter(shape=16, position=position_jitter(0.2)) +
+  scale_fill_brewer(palette="RdBu") + theme_minimal()
+
+```
+
