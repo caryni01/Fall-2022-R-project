@@ -69,6 +69,8 @@ data_df %>%
   head() %>% knitr::kable()
 ```
 
+The dataset has `nrow(na.omit(data_df))` observations across the country, each represents a summarised estimate of a district. We select New York state as our sample data to build the model as it has third largest population with a large number of observations. 
+
 ## Extract NY state as target sample
 ```{r}
 ny_data = data_df %>% 
@@ -113,6 +115,9 @@ ny_data %>% select(-sleep) %>% cor() %>% corrplot(
 ```
 
 ## Build model with elastic net
+
+Since some of the variables have relatively high correlation with each other according to the correlation matrix, the process of model selection starts by using elastic net regression in order to remedy for potential multicollinearity. We find the best lambda with lowest se through cross validation, and then fit an elastic net model with coefficients shown below. 
+
 ```{r}
 set.seed(2023)
 
@@ -128,30 +133,47 @@ model_coef = coef.glmnet(elastic_model) %>% as.matrix() %>% as.data.frame()
 model_coef[model_coef == 0] = NA
 plot(cv_object)
 model_coef 
-
 ```
+
+## Build model with multiple linear regression
+
+A multiple linear regression is then built with all of the variables selected above. Since the variable of obesity does not show significant influence in predicting prevalance of insufficient sleep, another multiple linear regression excluding obesity is built. The anova result tells that the second MLR model excluding obesity is favored because of the principle of parsimony. 
 
 ```{r}
 mlr_model_1 = lm(sleep ~ arthritis + bphigh + cancer + casthma + chd + copd + depression + diabetes + highchol + kidney + obesity, data = ny_data)
 
 mlr_model_2 = lm(sleep ~ arthritis  + bphigh + cancer + casthma + chd + copd + depression + diabetes + highchol + kidney, data = ny_data)
 
+summary(mlr_model_1) %>% broom::tidy() %>% knitr::kable(digits = 3)
+
 anova(mlr_model_2, mlr_model_1)
-# Pseudo adjusted R squared of elastic model
-elastic_model %>% broom::tidy() %>% select(dev.ratio) %>% unique()
 
 ```
 
-## Examine assumptions for MLR model
+## Examine assumptions for the chosen MLR model
 
 ```{r}
 par(mfrow = c(2, 2))
 plot(mlr_model_2)
 ```
 
+The diagnostic plots indicates that all of the assumptions of MLR below are met.\
 1.Residuals are normally distributed\
 2.Variance of residuals is constant across the range of variables\
 3.Residuals are independent of one another
+
+## Comparing elastic net regression model with the chosen MLR model
+
+```{r}
+# Pseudo adjusted R squared of elastic model
+elastic_model %>% broom::tidy() %>% select(dev.ratio) %>% unique()
+
+# Adjusted R squared of MLR model
+summary(mlr_model_1) %>% broom::glance() %>% select(adj.r.squared)
+
+```
+
+The dev.ratio and adjusted r.squared of `0.892` above shows that the elastic net regression model and MLR model give equally good fit to the training data from NY state.  
 
 ```{r}
 # Use the data from the rest of states as test data
@@ -189,7 +211,17 @@ result_mse %>%
   ggplot(aes(x = model, y = mse, fill = model)) + 
   geom_violin() +
   geom_jitter(shape=16, position=position_jitter(0.2)) +
-  scale_fill_brewer(palette="RdBu") + theme_minimal()
+  scale_fill_brewer(palette="RdBu") + theme_minimal() +
+   labs(
+      x = "Model",
+      y = "Test MSE",
+      caption = "Data from the CDC"
+    ) 
+result_mse %>% 
+  select(starts_with('mse')) %>% 
+  summary() %>% 
+  knitr::kable()
 
 ```
 
+We then use the data from rest of the country to test the performance of the two models in predicting the prevalence of inadequate sleep in other `50` states. The violion plot above shows that the test mean squared error of the elastic net regression and the multiple linear regression model. The statistics show that there is no significant difference between these two models in terms of predictive performance. Therefore, we conclude that both of models could be used for regression analysis.  
