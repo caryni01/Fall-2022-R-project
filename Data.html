@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Sleep and Social Factors</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<script src="site_libs/viz-1.8.2/viz.js"></script>
+<link href="site_libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="site_libs/grViz-binding-1.0.9/grViz.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Places_data.html">Sleep &amp; Diseases</a>
+</li>
+<li>
+  <a href="Data.html">Sleep &amp; Social factors</a>
+</li>
+<li>
+  <a href="https://rheaaa.shinyapps.io/myshiny/?_ga=2.230249179.631808033.1670647588-175632102.1670647588">Survey about sleep</a>
+</li>
+<li>
+  <a href="report.html">Final Report</a>
+</li>
+<li>
+  <a href="mailto:&lt;sleep8105@gmail.com&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/jchaicc/final.github.io.git">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="References.html">
+    <span class="fa fa-book fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Sleep and Social Factors</h1>
+
+</div>
+
+
+<div id="data-sources" class="section level1">
+<h1>Data Sources</h1>
+<ul>
+<li><p>The first data set that was used to explore the association
+between sleeping and social factors was downloaded from the <a
+href="https://www.cdc.gov/nchs/nhanes/index.htm">NHANES</a>
+database.</p></li>
+<li><p>The second data set was from <a
+href="https://www.cdc.gov/sleep/data-and-statistics/adults.html">CDC</a>.</p></li>
+</ul>
+<div id="data-processing-and-cleaning" class="section level2">
+<h2>Data Processing and Cleaning</h2>
+<ul>
+<li>For data from the NHANES database: The predictors and the response
+variable were from different data base in NHANES. First, the the column
+name for these response variables was changed to appropriate names. The
+original data included numbers to represent difference levels for each
+predictor, specific names was also replaced for each number. Then, the
+response variable related to sleeping was from another data base. For
+this data set, similar steps was used with dealing with the predictors
+data set. All column names was converted to appropriate names, and
+character names also replaced the numbers as well. An extra column was
+added to the data set:<code>ave_slp_hr</code>, which is the average
+sleeping hours per day, by calculating the mean of the weekday and
+weekend sleeping hours. For the third step, all empty cells was removed.
+Finally, the two cleaned data sets was joined through the patients’
+unique sequence number.</li>
+</ul>
+<pre class="r"><code>demo=foreign::read.xport(&quot;nhanes/P_DEMO.XPT&quot;) %&gt;%
+  janitor::clean_names() %&gt;%
+  select(seqn,riagendr,ridageyr,ridreth3,dmdeduc2,indfmpir) %&gt;%
+  drop_na() %&gt;%
+  rename(gender=riagendr,
+         age=ridageyr,
+         race=ridreth3,
+         education_level=dmdeduc2,
+         income_poverty_ratio=indfmpir) %&gt;%
+  mutate(gender=case_when(gender==1 ~ &quot;male&quot;,
+                          gender==2 ~ &quot;female&quot;)) %&gt;%
+  mutate(race=case_when(race==1 ~ &quot;Mexican American&quot;,
+                        race==2 ~ &quot;Other Hispanic&quot;,
+                        race==3 ~ &quot;Non-Hispanic White&quot;,
+                        race==4 ~ &quot;Non-Hispanic Black&quot;,
+                        race==6 ~ &quot;Non-Hispanic Asian&quot;,
+                        race==7 ~ &quot;Other Race&quot;)) %&gt;%
+  mutate(education_level=case_when(education_level==1 ~ &quot;less than 9th grade&quot;,
+                                   education_level==2 ~ &quot;9-11th grade&quot;,
+                                   education_level==3 ~ &quot;high school graduate&quot;,
+                                   education_level==4 ~ &quot;college or AA degree&quot;,
+                                   education_level==5 ~ &quot;college graduate or above&quot;,
+                                   education_level==7 ~ &quot;refused&quot;,
+                                   education_level==9 ~ &quot;don&#39;t know&quot;))
+
+
+sleep_df=foreign::read.xport(&quot;nhanes/P_SLQ.XPT&quot;) %&gt;%
+  janitor::clean_names() %&gt;% 
+  select(seqn,slq300,slq310,sld012,slq320,slq330,sld013,slq050,slq120) %&gt;%
+  rename(weekday_slp_time=slq300,
+         weekday_wake_time=slq310,
+         weekday_slp_hr=sld012,
+         weekend_slp_time=slq320,
+         weekend_wake_time=slq330,
+         weekend_slp_hr=sld013,
+         trouble_slp=slq050,
+         sleepy_freq=slq120
+         )              %&gt;%
+  filter(weekday_slp_time!=77777 &amp; weekday_slp_time!= 99999) %&gt;%
+  filter(weekday_wake_time!=77777 &amp; weekday_wake_time!= 99999) %&gt;%
+  filter(weekend_slp_time!=77777 &amp; weekend_slp_time != 99999) %&gt;%
+  filter(weekend_wake_time!= 77777 &amp; weekend_wake_time != 99999) %&gt;%
+  filter(trouble_slp!=7 &amp; trouble_slp!= 9) %&gt;%
+  filter(sleepy_freq!= 7 &amp; sleepy_freq!=9) %&gt;%
+  drop_na() %&gt;%
+  mutate(trouble_slp=case_when(trouble_slp==1 ~ &quot;yes&quot;,
+                               trouble_slp==2 ~ &quot;no&quot;)) %&gt;%
+  mutate(sleepy_freq=case_when(sleepy_freq==0 ~ &quot;never&quot;,
+                               sleepy_freq==1 ~ &quot;once a month&quot;,
+                               sleepy_freq==2 ~ &quot;2-4 per month&quot;,
+                               sleepy_freq==3 ~ &quot;5-15 per month&quot;,
+                               sleepy_freq==4 ~ &quot;16-30 per month&quot;,
+                               ))%&gt;% 
+  mutate(ave_slp_hr = (5*weekday_slp_hr + 2*weekend_slp_hr)/7)</code></pre>
+<pre class="r"><code>slp_df=inner_join(demo,sleep_df,by=&quot;seqn&quot;) %&gt;%
+  na_if(&quot;&quot;) %&gt;%
+  na.omit()
+write_csv(slp_df, &quot;data/slp_df.csv&quot;)</code></pre>
+</div>
+<div id="data-description" class="section level2">
+<h2>Data Description</h2>
+<div id="social-factors-related-to-sleeping-status-data"
+class="section level4">
+<h4>Social factors related to Sleeping Status Data</h4>
+<p>The resulting data file of <code>slp_df</code> contains a single
+dataframe with 7665 rows of data on 15 variables, the list below is our
+variables of interest:</p>
+<ul>
+<li><code>seqn</code>. The sequence number of the candidate.</li>
+<li><code>gender</code>. Gender of the candidate.</li>
+<li><code>age</code>. Age of the candidate.</li>
+<li><code>race</code>. Race of the candidate.</li>
+<li><code>hour</code>. Time(hour) violation occurred.</li>
+<li><code>education_level</code>. The education level of the
+candidate.</li>
+<li><code>income_poverty_ratio</code>. A ratio to classify poverty and
+not poverty. Ratio greater than 1 will be considered as not poverty,
+ratio less than 1 will considered as poverty.</li>
+<li><code>weekday_slp_time</code>. Sleep time on weekdays or
+workdays.</li>
+<li><code>weekday_wake_time</code>. Wake time on weekdays and
+workdays.</li>
+<li><code>weekday_slp_hr</code>. Average sleeping hours on weekdays or
+workdays.</li>
+<li><code>weekend_slp_time</code>. Sleep time on weekends.</li>
+<li><code>weekday_wake_time</code>.Wake time on weekends.</li>
+<li><code>weekend_slp_hr</code>. Average sleeping hours on
+weekends.</li>
+<li><code>trouble_slp</code>. A response on whether telling the doctor
+having trouble sleeping.</li>
+<li><code>sleepy_freq</code>. Average sleeply times during daytime per
+month.</li>
+<li><code>ave_slp_hr</code>. Average sleeping hours per day.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="exploratory-analysis" class="section level1">
+<h1>Exploratory Analysis</h1>
+<p>On this page, we’ll explore the association between our key outcome -
+average sleeping hours less than 7 hours (insufficient sleep) and
+predictors, including major demographic variables like age, race, and
+sex, poverty status, and education level.</p>
+<div id="national-trends-in-short-sleep-duration"
+class="section level2">
+<h2>National trends in short sleep duration</h2>
+<p>Short sleep duration is based on age group recommended hours of sleep
+per day and defined as less than 7 hours for adults. This plot shows
+age-adjusted prevalence of adults who reported short sleep duration from
+2013 to 2020. Overall, short sleep duration prevalence was higher among
+males than females across years.</p>
+<pre class="r"><code>year_df=read_csv(&quot;data/AdultTrends.csv&quot;) %&gt;%
+  janitor::clean_names() %&gt;%
+  pivot_longer(cols=c(&quot;female&quot;, &quot;male&quot;),
+               names_to = &quot;sex&quot;,
+               values_to = &quot;age_adjust_prev&quot;) %&gt;%
+  ggplot(aes(x=year,y=age_adjust_prev,col=sex))+geom_line()+geom_point()+labs(
+    title = &quot;National trends in short sleep duration&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Age Adjusted Prevalence %&quot;
+    )
+
+year_df+transition_reveal(year)</code></pre>
+<p><img
+src="Data_files/figure-html/unnamed-chunk-3-1.gif" /><!-- --></p>
+</div>
+<div id="education-level" class="section level2">
+<h2>Education level</h2>
+<p>We first want to get the distribution of sleeping hours less than 7
+hours across the five different education levels. We will construct a
+bar chart tabulating the average sleeping hours per week in each of the
+five education levels. Gender consideration was also added into to the
+bar chart in order to see a difference between female and male in each
+category.</p>
+<pre class="r"><code> edu_plot=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7)%&gt;%
+  group_by(education_level,gender) %&gt;%
+  summarize(ave_sleep=mean((weekday_slp_hr*5+weekend_slp_hr*2)/7)) %&gt;% 
+  ungroup() %&gt;%
+  ggplot(aes(x=education_level,y=ave_sleep,fill=gender))+ geom_bar(width=0.5,stat=&quot;identity&quot;)+
+  viridis::scale_fill_viridis(
+    name = &quot;gender&quot;,
+    discrete = TRUE
+  ) + geom_text(aes(label = round(ave_sleep, 2)),position = position_stack(vjust=0.9), color = &quot;white&quot;, size = 4)+
+  theme(axis.text.x = element_text(angle = -90, vjust = 0.5, hjust=1))+labs(
+    title = &quot;Distribution of sleeping hours across education level&quot;,
+    x = &quot;Education Level&quot;,
+    y = &quot;Average Sleeping hours per day&quot;
+    )
+edu_plot</code></pre>
+<p><img src="Data_files/figure-html/unnamed-chunk-4-1.png" width="768" /></p>
+<p>From the above plot, high school graduates has the least sleeping
+hours, while college graduates or above has the highest. Female and male
+does not have a significant difference in both groups.</p>
+</div>
+<div id="race" class="section level2">
+<h2>Race</h2>
+<p>A heat map was made to visualize sleeping hours less than 7 hours
+among different races. The below plot indicates that there is a large
+number of people who has a sleeping hour of 6 hours per day among the
+Non-Hispanic black group. There are also many Non-Hispanic Whites who
+has an average of 6 hours per day.</p>
+<pre class="r"><code>race_plot=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(sleep_ave=(weekday_slp_hr*5+weekend_slp_hr*2)/7) %&gt;%
+  group_by(race,sleep_ave) %&gt;%
+  summarise(obs=n()) %&gt;%
+  plot_ly(
+    x = ~sleep_ave, y = ~race, z = ~obs, type = &quot;heatmap&quot;, colors = &quot;BuPu&quot;
+  ) %&gt;%
+  colorbar(title = &quot;Number of People&quot;, x = 1, y = 0.5) 
+layout(race_plot, xaxis = list(title = &quot;Average Sleeping Hours Per Day&quot;), yaxis = list(title = &quot;Race&quot;))</code></pre>
+<div id="htmlwidget-e28b7481fb9dee05f861" style="width:768px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e28b7481fb9dee05f861">{"x":{"visdat":{"39c064364e42":["function () ","plotlyVisDat"]},"cur_data":"39c064364e42","attrs":{"39c064364e42":{"x":{},"y":{},"z":{},"colors":"BuPu","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"heatmap"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Average Sleeping Hours Per Day"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Race","type":"category","categoryorder":"array","categoryarray":["Mexican American","Non-Hispanic Asian","Non-Hispanic Black","Non-Hispanic White","Other Hispanic","Other Race"]},"scene":{"zaxis":{"title":"obs"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"Number of People","ticklen":2,"len":0.5,"lenmode":"fraction","y":0.5,"yanchor":"top","x":1},"colorscale":[["0","rgba(247,252,253,1)"],["0.0416666666666667","rgba(239,247,250,1)"],["0.0833333333333333","rgba(232,241,247,1)"],["0.125","rgba(224,236,244,1)"],["0.166666666666667","rgba(213,228,239,1)"],["0.208333333333333","rgba(202,219,235,1)"],["0.25","rgba(191,211,230,1)"],["0.291666666666667","rgba(180,203,226,1)"],["0.333333333333333","rgba(169,196,222,1)"],["0.375","rgba(158,188,218,1)"],["0.416666666666667","rgba(152,175,211,1)"],["0.458333333333333","rgba(146,163,205,1)"],["0.5","rgba(140,150,198,1)"],["0.541666666666667","rgba(141,136,191,1)"],["0.583333333333333","rgba(141,122,184,1)"],["0.625","rgba(140,107,177,1)"],["0.666666666666667","rgba(139,94,170,1)"],["0.708333333333333","rgba(138,80,164,1)"],["0.75","rgba(136,65,157,1)"],["0.791666666666667","rgba(134,52,146,1)"],["0.833333333333333","rgba(132,36,135,1)"],["0.875","rgba(129,15,124,1)"],["0.916666666666667","rgba(111,8,107,1)"],["0.958333333333333","rgba(94,3,91,1)"],["1","rgba(77,0,75,1)"]],"showscale":true,"x":[3.5,3.57142857142857,3.71428571428571,4,4.28571428571429,4.42857142857143,4.5,4.71428571428571,5,5.14285714285714,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3.14285714285714,3.5,4,4.07142857142857,4.14285714285714,4.28571428571429,4.42857142857143,4.85714285714286,4.92857142857143,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.28571428571429,3.5,3.57142857142857,3.85714285714286,3.92857142857143,4,4.07142857142857,4.14285714285714,4.21428571428571,4.28571428571429,4.35714285714286,4.42857142857143,4.5,4.57142857142857,4.64285714285714,4.71428571428571,4.78571428571429,4.85714285714286,4.92857142857143,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.28571428571429,3.5,3.57142857142857,3.71428571428571,3.78571428571429,3.92857142857143,4,4.14285714285714,4.21428571428571,4.28571428571429,4.35714285714286,4.42857142857143,4.5,4.57142857142857,4.64285714285714,4.71428571428571,4.78571428571429,4.85714285714286,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.5,4,4.14285714285714,4.28571428571429,4.5,4.57142857142857,4.71428571428571,4.92857142857143,5,5.07142857142857,5.14285714285714,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.5,3.78571428571429,3.92857142857143,4,4.28571428571429,4.42857142857143,4.57142857142857,4.85714285714286,5,5.14285714285714,5.28571428571429,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.85714285714286,6.92857142857143],"y":["Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race"],"z":[1,1,1,2,4,1,3,1,3,1,1,1,3,1,3,4,1,5,3,14,7,4,11,3,5,14,19,5,11,9,8,12,1,1,5,1,1,3,2,1,1,13,2,1,1,3,5,3,2,2,2,6,23,3,5,2,7,2,5,14,16,8,7,6,7,9,6,3,2,2,4,1,19,2,5,1,15,2,5,10,6,1,13,3,4,5,34,5,12,2,24,2,11,11,20,6,21,10,13,6,69,8,13,10,35,7,24,31,31,19,36,17,30,24,7,2,4,1,3,1,1,17,1,2,3,1,1,11,2,2,1,4,4,52,2,2,4,7,2,5,18,10,3,7,4,10,8,65,10,6,6,31,13,19,59,33,28,23,17,30,26,2,1,6,2,1,3,3,1,3,11,1,1,2,2,2,3,3,2,1,1,4,1,24,1,7,5,10,6,5,18,8,4,8,6,11,5,1,1,1,1,3,2,1,2,1,7,2,1,1,3,2,1,4,2,3,3,11,3,1,2,9,2,6,8,3,3,6,9,6],"type":"heatmap","xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="race-gender-gap-by-education-level" class="section level3">
+<h3>Race Gender Gap by Education Level</h3>
+<p>The below plot demonstrates the gender gap in the patients for
+different races. Male outnumber female for sleeping less than 7 hours
+per day for all race, except Non-Hispanic Black and Non-Hispanic Asian.
+The bubble represents the degree of the gap, along inlcuding their
+education level.</p>
+<pre class="r"><code>gender_plot=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  group_by(race,education_level) %&gt;%
+  summarize(total_f=sum(gender==&quot;female&quot;),
+            total_m=sum(gender==&quot;male&quot;),
+            gap=total_m-total_f) %&gt;%
+  mutate(text_lable=str_c(&quot;Race=&quot;,race,&quot;\nEducation level: &quot;, education_level)) %&gt;%
+  plot_ly(x=~total_m,y=~total_f,text=~text_lable,color=~race,size=~gap,type=&quot;scatter&quot;,mode=&quot;markers&quot;,
+          colors=&quot;viridis&quot;,sizes = c(50, 700), marker = list(opacity = 0.7))
+
+layout(gender_plot, title = &quot;Race Gender Gap by Education Level&quot;, xaxis = list(title = &quot;Number of Male Sleeping less than 7 hrs&quot;), yaxis = list(title = &quot;Number of Female Sleeping less than 7 hrs&quot;))</code></pre>
+<div id="htmlwidget-dc9724731b1b2227b4f2" style="width:768px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-dc9724731b1b2227b4f2">{"x":{"visdat":{"39c07b915b84":["function () ","plotlyVisDat"]},"cur_data":"39c07b915b84","attrs":{"39c07b915b84":{"x":{},"y":{},"text":{},"mode":"markers","marker":{"opacity":0.7},"color":{},"size":{},"colors":"viridis","alpha_stroke":1,"sizes":[50,700],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Race Gender Gap by Education Level","xaxis":{"domain":[0,1],"automargin":true,"title":"Number of Male Sleeping less than 7 hrs"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number of Female Sleeping less than 7 hrs"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[16,13,26,21,19],"y":[11,4,22,17,13],"text":["Race=Mexican American<br />Education level: 9-11th grade","Race=Mexican American<br />Education level: college graduate or above","Race=Mexican American<br />Education level: college or AA degree","Race=Mexican American<br />Education level: high school graduate","Race=Mexican American<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(68,1,84,1)","size":[241.176470588235,292.156862745098,228.43137254902,228.43137254902,253.921568627451],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(68,1,84,1)"}},"type":"scatter","name":"Mexican American","textfont":{"color":"rgba(68,1,84,1)","size":[241.176470588235,292.156862745098,228.43137254902,228.43137254902,253.921568627451]},"error_y":{"color":"rgba(68,1,84,1)","width":[]},"error_x":{"color":"rgba(68,1,84,1)","width":[]},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[6,42,20,6,2],"y":[10,37,21,15,11],"text":["Race=Non-Hispanic Asian<br />Education level: 9-11th grade","Race=Non-Hispanic Asian<br />Education level: college graduate or above","Race=Non-Hispanic Asian<br />Education level: college or AA degree","Race=Non-Hispanic Asian<br />Education level: high school graduate","Race=Non-Hispanic Asian<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(65,68,135,1)","size":[126.470588235294,241.176470588235,164.705882352941,62.7450980392157,62.7450980392157],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(65,68,135,1)"}},"type":"scatter","name":"Non-Hispanic Asian","textfont":{"color":"rgba(65,68,135,1)","size":[126.470588235294,241.176470588235,164.705882352941,62.7450980392157,62.7450980392157]},"error_y":{"color":"rgba(65,68,135,1)","width":[]},"error_x":{"color":"rgba(65,68,135,1)","width":[]},"line":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[34,65,131,101,11],"y":[29,75,133,60,1],"text":["Race=Non-Hispanic Black<br />Education level: 9-11th grade","Race=Non-Hispanic Black<br />Education level: college graduate or above","Race=Non-Hispanic Black<br />Education level: college or AA degree","Race=Non-Hispanic Black<br />Education level: high school graduate","Race=Non-Hispanic Black<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(42,120,142,1)","size":[241.176470588235,50,151.960784313725,700,304.901960784314],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(42,120,142,1)"}},"type":"scatter","name":"Non-Hispanic Black","textfont":{"color":"rgba(42,120,142,1)","size":[241.176470588235,50,151.960784313725,700,304.901960784314]},"error_y":{"color":"rgba(42,120,142,1)","width":[]},"error_x":{"color":"rgba(42,120,142,1)","width":[]},"line":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[32,65,126,89,11],"y":[36,41,102,65,1],"text":["Race=Non-Hispanic White<br />Education level: 9-11th grade","Race=Non-Hispanic White<br />Education level: college graduate or above","Race=Non-Hispanic White<br />Education level: college or AA degree","Race=Non-Hispanic White<br />Education level: high school graduate","Race=Non-Hispanic White<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(34,168,132,1)","size":[126.470588235294,483.333333333333,483.333333333333,483.333333333333,304.901960784314],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(34,168,132,1)"}},"type":"scatter","name":"Non-Hispanic White","textfont":{"color":"rgba(34,168,132,1)","size":[126.470588235294,483.333333333333,483.333333333333,483.333333333333,304.901960784314]},"error_y":{"color":"rgba(34,168,132,1)","width":[]},"error_x":{"color":"rgba(34,168,132,1)","width":[]},"line":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[13,18,27,19,16],"y":[7,16,23,14,21],"text":["Race=Other Hispanic<br />Education level: 9-11th grade","Race=Other Hispanic<br />Education level: college graduate or above","Race=Other Hispanic<br />Education level: college or AA degree","Race=Other Hispanic<br />Education level: high school graduate","Race=Other Hispanic<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(122,209,81,1)","size":[253.921568627451,202.941176470588,228.43137254902,241.176470588235,113.725490196078],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(122,209,81,1)"}},"type":"scatter","name":"Other Hispanic","textfont":{"color":"rgba(122,209,81,1)","size":[253.921568627451,202.941176470588,228.43137254902,241.176470588235,113.725490196078]},"error_y":{"color":"rgba(122,209,81,1)","width":[]},"error_x":{"color":"rgba(122,209,81,1)","width":[]},"line":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[9,9,25,18,2],"y":[2,11,23,12,0],"text":["Race=Other Race<br />Education level: 9-11th grade","Race=Other Race<br />Education level: college graduate or above","Race=Other Race<br />Education level: college or AA degree","Race=Other Race<br />Education level: high school graduate","Race=Other Race<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(253,231,37,1)","size":[266.666666666667,151.960784313725,202.941176470588,253.921568627451,202.941176470588],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(253,231,37,1)"}},"type":"scatter","name":"Other Race","textfont":{"color":"rgba(253,231,37,1)","size":[266.666666666667,151.960784313725,202.941176470588,253.921568627451,202.941176470588]},"error_y":{"color":"rgba(253,231,37,1)","width":[]},"error_x":{"color":"rgba(253,231,37,1)","width":[]},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="poverty-status" class="section level2">
+<h2>Poverty Status</h2>
+<p>We can observe that people who are in poverty tend to have less
+sleeping hours than those who are not in poverty.</p>
+<pre class="r"><code>income_df=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(ip_stat=case_when(income_poverty_ratio &gt; 1 ~ &quot;not in poverty&quot;,
+                           income_poverty_ratio &lt; 1~ &quot;in poverty&quot;,
+                           income_poverty_ratio == 1~ &quot;in poverty&quot;)) %&gt;%
+  ggplot(aes(x=weekday_slp_hr,y=ip_stat,fill=ip_stat))+
+  geom_density_ridges(
+    aes(point_color = ip_stat, point_shape = ip_stat,point_fill=ip_stat),
+    alpha = .3, point_alpha = 0.7)+
+   scale_x_continuous(
+    breaks = c(2, 4, 6), 
+    labels = c(&quot;2hrs&quot;, &quot;4hrs&quot;, &quot;6hrs&quot;),
+    limits = c(2, 6)
+    )+labs(
+    x = &quot; Average Sleeping Hours&quot;
+    )
+  
+box_plot=
+  slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(ip_stat=case_when(income_poverty_ratio &gt; 1 ~ &quot;not in poverty&quot;,
+                           income_poverty_ratio &lt; 1~ &quot;in poverty&quot;,
+                           income_poverty_ratio == 1~ &quot;in poverty&quot;)) %&gt;%
+  mutate(sleep_ave=(weekday_slp_hr*5+weekend_slp_hr*2)/7) %&gt;%
+  ggplot(aes(x=ip_stat,y=sleep_ave))+geom_boxplot(aes(fill = ip_stat), alpha = 0.3)+
+  geom_hline(aes(yintercept=median(sleep_ave),
+            color=&quot;red&quot;, linetype=&quot;dashed&quot;))+
+  geom_text(aes(0, median(ave_slp_hr), label = &quot;sleep hours median&quot;), vjust = -0.5, hjust = 0, color = &quot;red&quot;)+labs(
+    x = &quot; Poverty Status&quot;,
+    y = &quot;Average Sleeping Hours&quot;
+    )
+
+comb=income_df+box_plot
+comb+plot_annotation(
+  title = &quot;Sleeping Hours By Poverty Status&quot;
+) </code></pre>
+<p><img src="Data_files/figure-html/unnamed-chunk-7-1.png" width="960" /></p>
+</div>
+<div id="age" class="section level2">
+<h2>Age</h2>
+<p>A bar plot was made to see the distribution of average sleeping hours
+less than 7 hours in different age groups. People age between 71 and 80
+has the least sleeping hours with about 5.68 hours per day.</p>
+<pre class="r"><code>age_group= slp_df%&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(age_gp=case_when(age&gt;=20 &amp; age&lt;=30 ~ &quot;20-30&quot;,
+                          age&gt;=31 &amp;age &lt;=40 ~ &quot;31-40&quot;,
+                          age&gt;=41 &amp;age&lt;=50 ~ &quot;41-50&quot;,
+                          age&gt;=51 &amp;age&lt;=60 ~ &quot;51-60&quot;,
+                          age&gt;=61 &amp;age&lt;=70 ~ &quot;61-70&quot;,
+                          age&gt;=71 &amp; age &lt;=80 ~ &quot;71-80&quot;)) %&gt;%
+  group_by(age_gp) %&gt;%
+  summarise(ave_slp=mean((weekday_slp_hr*5+weekend_slp_hr*2)/7))%&gt;%
+  ungroup() %&gt;%
+  mutate(age_gp=fct_reorder(age_gp,ave_slp)) %&gt;%
+  ggplot(aes(x=age_gp,y=ave_slp,fill=age_gp))+ geom_bar(stat=&quot;identity&quot;)+ scale_fill_viridis_d()+
+  theme(axis.text.x = element_text(angle = -90, vjust = 0.5, hjust=1))+
+  geom_text(aes(label = round(ave_slp, 2)),position = position_stack(vjust=0.9), color = &quot;white&quot;, size = 4)+labs(x=&quot;Age Group&quot;,y=&quot;Average Sleeping Hours Per Day&quot;,title=&quot;Distribution of Sleeping Hours across Age Group&quot;)
+age_group</code></pre>
+<p><img src="Data_files/figure-html/unnamed-chunk-8-1.png" width="768" /></p>
+</div>
+</div>
+<div id="statistical-analysis" class="section level1">
+<h1>Statistical Analysis</h1>
+<div id="multiple-linear-regression-mlr" class="section level2">
+<h2>Multiple Linear Regression (MLR)</h2>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<pre class="r"><code>df_mod = slp_df %&gt;% 
+  select(gender, age, race, education_level, income_poverty_ratio, trouble_slp, sleepy_freq, ave_slp_hr)
+
+set.seed(1)
+rt = 0.8
+sub = sample(1:nrow(df_mod), round(nrow(df_mod)*rt))
+data_train = df_mod[sub,]
+data_test = df_mod[-sub,]</code></pre>
+</div>
+<div id="modeling" class="section level3">
+<h3>Modeling</h3>
+<pre class="r"><code>lmraw = lm(ave_slp_hr ~ ., data = data_train)</code></pre>
+<p>The model driven by multiple linear regression is: <span
+class="math display">\[\scriptsize
+sleep\_hour=8.09-0.31*I(gender = male)-0.28*I(race = Non-Hispanic\
+Black)-0.22*I(education\_level = college\ graduate\ or\
+above)\\\scriptsize-0.28*I(education\_level = college\ or\ AA\
+degree)-0.14*I(education\_level = high\
+school\  graduate)-0.05*income\_poverty\_ratio-0.10*trouble\_slpyes\\\scriptsize
++0.32*I(sleepy\_freq = 2-4 per\ month)+0.37*I(sleepy\_freq =
+freqnever)+0.33*I(sleepy\_freq = freqonce\ month).\]</span> We find it
+strongly relating to gender, trouble_types, income_poverty_ratio, and
+some levels in race, education_level and sleep frequency.</p>
+</div>
+<div id="diagnostic-plots" class="section level3">
+<h3>Diagnostic plots</h3>
+<pre class="r"><code>par(mfrow = c(2,2))
+plot(lmraw, cex.lab = 1)</code></pre>
+<p><img src="Data_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<p>Overall, the diagnostic plots indicates that all of the assumptions
+of MLR below are met.<br />
+1.Residuals are normally distributed<br />
+2.Variance of residuals is constant across the range of variables<br />
+3.Residuals are independent of one another</p>
+</div>
+<div id="mlr-under-stepwise" class="section level3">
+<h3>MLR under stepwise</h3>
+<pre class="r"><code>step1 = step(lmraw, direction = &#39;both&#39;, trace=0)</code></pre>
+<p>The model after stepwise method is: <span
+class="math display">\[\scriptsize
+sleep\_hour=8.10-0.31*I(gender = male)-0.28*I(race = Non-Hispanic\
+Black)-0.22*I(education\_level = college\ graduate\ or\
+above)\\\scriptsize-0.28*I(education\_level = college\ or\ AA\
+degree)-0.14*I(education\_level = high\
+school\  graduate)-0.05*income\_poverty\_ratio-0.10*trouble\_slpyes\\\scriptsize
++0.32*I(sleepy\_freq = 2-4 per\ month)+0.37*I(sleepy\_freq =
+freqnever)+0.33*I(sleepy\_freq = freqonce\ month).\]</span> We find it
+is nearly the same as previous multiple linear regression model.</p>
+</div>
+<div id="testing" class="section level3">
+<h3>Testing</h3>
+<pre class="r"><code>raw_pred = predict(lmraw, newdata = data_test)
+
+dlm =  data.frame(
+    Error = c(&quot;MSE&quot;, &quot;MAE&quot;, &quot;RMSE&quot;), 
+    Value = c(mean((data_test$ave_slp_hr - raw_pred)^2),
+              caret::MAE(data_test$ave_slp_hr, raw_pred), 
+              caret::RMSE(data_test$ave_slp_hr, raw_pred)))
+
+knitr::kable(dlm)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Error</th>
+<th align="right">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MSE</td>
+<td align="right">2.111956</td>
+</tr>
+<tr class="even">
+<td align="left">MAE</td>
+<td align="right">1.089663</td>
+</tr>
+<tr class="odd">
+<td align="left">RMSE</td>
+<td align="right">1.453257</td>
+</tr>
+</tbody>
+</table>
+<p>The table above shows the statistical measurement factors about the
+linear model.</p>
+</div>
+</div>
+<div id="logistic" class="section level2">
+<h2>Logistic</h2>
+<pre class="r"><code>data_logtrain = data_train %&gt;% 
+  mutate(sufficient_slp = ifelse((ave_slp_hr &gt;= 7), 1, 0)) %&gt;% 
+  select(-ave_slp_hr)
+glmraw = glm(sufficient_slp ~ ., data = data_logtrain, family = binomial)</code></pre>
+<p>We use logistic regression model for predicting whether the person
+has sufficient sleep. Following the definition of sufficient sleep in
+Sleep &amp; Diseases section, we label the ave_slp_hr greater or equal
+to 7 hours as ‘sufficient’. The first logistic model shows the
+significant predictors are gender, race, education_level, trouble_types,
+and sleep_freq.</p>
+<pre class="r"><code>step2 = step(glmraw, direction = &#39;both&#39;, trace=0)
+summary(step2)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = sufficient_slp ~ gender + race + trouble_slp + 
+##     sleepy_freq, family = binomial, data = data_logtrain)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0226   0.5288   0.6476   0.7722   1.2735  
+## 
+## Coefficients:
+##                           Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)                1.02780    0.14214   7.231 4.80e-13 ***
+## gendermale                -0.38836    0.06156  -6.308 2.82e-10 ***
+## raceNon-Hispanic Asian    -0.09637    0.13922  -0.692  0.48881    
+## raceNon-Hispanic Black    -0.71862    0.11440  -6.281 3.35e-10 ***
+## raceNon-Hispanic White    -0.01019    0.11377  -0.090  0.92865    
+## raceOther Hispanic        -0.20316    0.14107  -1.440  0.14984    
+## raceOther Race            -0.45807    0.16313  -2.808  0.00499 ** 
+## trouble_slpyes            -0.14384    0.06851  -2.100  0.03576 *  
+## sleepy_freq2-4 per month   0.73843    0.11044   6.686 2.29e-11 ***
+## sleepy_freq5-15 per month  0.32642    0.11713   2.787  0.00532 ** 
+## sleepy_freqnever           0.87908    0.12666   6.941 3.90e-12 ***
+## sleepy_freqonce a month    0.82618    0.11788   7.009 2.41e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 6738.4  on 6131  degrees of freedom
+## Residual deviance: 6522.3  on 6120  degrees of freedom
+## AIC: 6546.3
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>The model after stepwise method shows the significant predictors are
+still gender, race, education_level, trouble_types, and sleep_freq, but
+the estimated coefficients change.</p>
+<pre class="r"><code>anova(object = glmraw,test = &quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: sufficient_slp
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##                      Df Deviance Resid. Df Resid. Dev  Pr(&gt;Chi)    
+## NULL                                  6131     6738.4              
+## gender                1   28.957      6130     6709.4 7.402e-08 ***
+## age                   1    0.106      6129     6709.3   0.74514    
+## race                  5   92.495      6124     6616.8 &lt; 2.2e-16 ***
+## education_level       6   15.238      6118     6601.6   0.01848 *  
+## income_poverty_ratio  1    0.367      6117     6601.2   0.54443    
+## trouble_slp           1   15.230      6116     6586.0 9.517e-05 ***
+## sleepy_freq           4   76.823      6112     6509.2 8.199e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We test model significance using ANOVA, and claim the significant
+predictors for logistic regression model are the same as stepwise
+method.</p>
+<div id="testing-1" class="section level3">
+<h3>Testing</h3>
+<pre class="r"><code>data_logtest = data_test %&gt;% 
+  mutate(sufficient_slp = ifelse((ave_slp_hr &gt;= 7), &#39;sufficient&#39;, &#39;insufficient&#39;)) %&gt;% 
+  select(-ave_slp_hr)
+prob2 = round(predict(object = glmraw, newdata = data_logtest,type = &quot;response&quot;))
+pred2 = ifelse(prob2 == 1, &#39;sufficient&#39;, &#39;insufficient&#39;)
+pred2 = factor(pred2, levels = c(&#39;insufficient&#39;, &#39;sufficient&#39;), order=TRUE)
+tablog = table(data_logtest$sufficient_slp, pred2, dnn=c(&quot;true&quot;,&quot;pre&quot;))
+tablog</code></pre>
+<pre><code>##               pre
+## true           insufficient sufficient
+##   insufficient            6        356
+##   sufficient              5       1166</code></pre>
+<p>From the table, we find:<br />
+1. the logistic model works well on sufficient sleep, <span
+class="math inline">\(\frac{1166}{1166+5} = 99.57\%\)</span><br />
+2. the logistic model works not well on sufficient sleep, <span
+class="math inline">\(\frac{6}{6+356} = 0.02\%\)</span><br />
+3. the total accuracy of the model prediction is <span
+class="math inline">\(\frac{1166+6}{1166+5+6+356} = 76.45\%\)</span></p>
+<p>We find the model does not have the ability to predict insufficient
+sleep cases, and the extreme gap extreme gap of the prediction ability
+between sufficient sleep and insufficient sleep inspires us to optimize
+the logistic regression model.</p>
+</div>
+</div>
+<div id="xgboost" class="section level2">
+<h2>XGBoost</h2>
+<p>Boosting is a well-known machine learning method, and we decide to
+use XGBoost algorithm to optimize the prediction ability based on the
+logistic objective.</p>
+<div id="data-1" class="section level3">
+<h3>Data</h3>
+<pre class="r"><code>clafeats = c(&#39;gender&#39;, &#39;race&#39;, &#39;education_level&#39;, &#39;trouble_slp&#39;, &#39;sleepy_freq&#39;)
+dums = dummyVars(~ gender + race + education_level + trouble_slp + sleepy_freq, data = df_mod)
+slp_oh = as.data.frame(predict(dums, newdata = df_mod))
+slp_df_new =cbind(df_mod[,-c(which(colnames(df_mod) %in% clafeats))],slp_oh) %&gt;% 
+  mutate(sufficient_slp = ifelse((ave_slp_hr &gt;= 7), 1, 0)) %&gt;% 
+  select(-ave_slp_hr)
+
+set.seed(123)
+rtxg = 0.8
+subxg = sample(1:nrow(slp_df_new), round(nrow(slp_df_new)*rt))
+data_trainxg = slp_df_new[sub,]
+data_testxg = slp_df_new[-sub,]
+
+data_trainx = data_trainxg[,-25]
+data_trainy = data.frame(data_trainxg[,25])
+names(data_trainy) = c(&#39;label&#39;)
+data_testx = data_testxg[,-25]
+data_testy = data.frame(data_testxg[,25])
+names(data_testy) = c(&#39;label&#39;)
+
+dtrain = xgb.DMatrix(data = as.matrix(data_trainx), label = data_trainy$label)
+dtest = xgb.DMatrix(data = as.matrix(data_testx), label = data_testy$label)</code></pre>
+</div>
+<div id="training" class="section level3">
+<h3>Training</h3>
+<pre class="r"><code>xgb2 = xgboost(data = dtrain, booster = &quot;gbtree&quot;, max_depth = 10, nround = 2000, objective = &quot;binary:logistic&quot;, verbose = 0)</code></pre>
+<p>We choose the gbtree booster and binary:logistic objective for
+training xgboost model and comparing with logistic regression model
+later.</p>
+</div>
+<div id="testing-2" class="section level3">
+<h3>Testing</h3>
+<pre class="r"><code>xgbpred2 = round(predict(xgb2, dtest))
+tablog = table(data_testy$label, xgbpred2, dnn=c(&quot;true&quot;,&quot;pre&quot;))
+tablog</code></pre>
+<pre><code>##     pre
+## true   0   1
+##    0  75 287
+##    1 201 970</code></pre>
+<p>From the table, we find:<br />
+1. the logistic model works well on sufficient sleep, <span
+class="math inline">\(\frac{970}{970+201} = 82.84\%\)</span><br />
+2. the logistic model works not well on sufficient sleep, <span
+class="math inline">\(\frac{75}{75+287} = 20.72\%\)</span><br />
+3. the total accuracy of the model prediction is <span
+class="math inline">\(\frac{75+970}{75+287+970+201} =
+68.17\%\)</span></p>
+<p>Comparing xgboost with logistic regression, we find although the
+prediction abilities of xgboost under gbtree booster and binary:logistic
+objective for sufficient sleep and the total are lower, the model
+actually is much reasonable as it could better predict insufficient
+sleep cases without extreme gap of the prediction ability between two
+groups.</p>
+<pre class="r"><code>xgb_imp2 = xgb.importance(feature_names = xgb2$feature_names, model = xgb2)
+xgb.ggplot.importance(xgb_imp2, top_n =10, n_clusters = 2)</code></pre>
+<p><img src="Data_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
+<p>The feature importance plot of XGBoost model indicates two extremely
+important factors, income_poverty_ratio and age. Which differs from
+linear models so that we want to explore the decision tree
+structure.</p>
+</div>
+<div id="tree-plot" class="section level3">
+<h3>Tree plot</h3>
+<pre class="r"><code>xgb.plot.tree(model = xgb2, trees=1999, plot_width = 800)</code></pre>
+<div id="htmlwidget-33a9fd19b8a1218e22b9" style="width:800px;height:576px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-33a9fd19b8a1218e22b9">{"x":{"diagram":"digraph {\n\ngraph [layout = \"dot\",\n       rankdir = \"LR\"]\n\nnode [color = \"DimGray\",\n      style = \"filled\",\n      fontname = \"Helvetica\"]\n\nedge [color = \"DimGray\",\n     arrowsize = \"1.5\",\n     arrowhead = \"vee\",\n     fontname = \"Helvetica\"]\n\n  \"1\" [label = \"Tree 1999\nincome_poverty_ratio\nCover: 62.9733429\nGain: 0.000239511981\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"2\" [label = \"genderfemale\nCover: 2.51974988\nGain: 0.000889236573\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"3\" [label = \"income_poverty_ratio\nCover: 60.4535942\nGain: 0.00042200755\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"4\" [label = \"Leaf\nCover: 1.1346997\nValue: -0.00649295142\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"5\" [label = \"Leaf\nCover: 1.38505018\nValue: 0.00218060869\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"6\" [label = \"age\nCover: 4.25633192\nGain: 0.000606495887\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"7\" [label = \"income_poverty_ratio\nCover: 56.1972618\nGain: 0.000454759545\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"8\" [label = \"age\nCover: 2.50290895\nGain: 0.000761303178\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"9\" [label = \"Leaf\nCover: 1.75342321\nValue: 0.00573912729\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"10\" [label = \"age\nCover: 9.80618763\nGain: 0.0018956901\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"11\" [label = \"income_poverty_ratio\nCover: 46.3910713\nGain: 0.00111477321\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"12\" [label = \"Leaf\nCover: 1.29169559\nValue: 0.00342856953\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"13\" [label = \"Leaf\nCover: 1.21121323\nValue: -0.00438651629\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"14\" [label = \"income_poverty_ratio\nCover: 7.31453371\nGain: 0.000999105978\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"15\" [label = \"income_poverty_ratio\nCover: 2.4916544\nGain: 0.000509388454\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"16\" [label = \"Leaf\nCover: 1.26789522\nValue: 0.00674024131\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"17\" [label = \"income_poverty_ratio\nCover: 45.1231766\nGain: 0.000223552066\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"18\" [label = \"income_poverty_ratio\nCover: 4.25301218\nGain: 0.00269462331\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"19\" [label = \"education_levelcollege or AA degree\nCover: 3.06152129\nGain: 0.0018697253\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"20\" [label = \"Leaf\nCover: 1.44835281\nValue: 0.00656974083\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"21\" [label = \"Leaf\nCover: 1.04330146\nValue: -0.000733739464\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"22\" [label = \"income_poverty_ratio\nCover: 2.11389351\nGain: 0.00037438955\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"23\" [label = \"income_poverty_ratio\nCover: 43.009285\nGain: 0.000888135633\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"24\" [label = \"age\nCover: 2.74063253\nGain: 0.0015762226\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"25\" [label = \"Leaf\nCover: 1.51237965\nValue: 0.00692419615\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"26\" [label = \"Leaf\nCover: 1.72548771\nValue: -0.0121403635\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"27\" [label = \"Leaf\nCover: 1.33603358\nValue: 0.000926949724\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"28\" [label = \"Leaf\nCover: 1.11202657\nValue: 0.00106493745\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"29\" [label = \"Leaf\nCover: 1.00186682\nValue: -0.00505874353\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"30\" [label = \"Leaf\nCover: 1.14088988\nValue: 0.00606213277\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"31\" [label = \"sleepy_freq5-15 per month\nCover: 41.8683929\nGain: 0.000464290031\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"32\" [label = \"Leaf\nCover: 1.44494832\nValue: 0.00120314583\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"33\" [label = \"Leaf\nCover: 1.29568422\nValue: -0.010720876\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"34\" [label = \"income_poverty_ratio\nCover: 35.5099678\nGain: 0.00142374518\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"35\" [label = \"income_poverty_ratio\nCover: 6.35842705\nGain: 0.00171111012\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"36\" [label = \"Leaf\nCover: 1.0064764\nValue: -0.00840273593\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"37\" [label = \"education_levelhigh school graduate\nCover: 34.5034904\nGain: 0.00113918772\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"38\" [label = \"Leaf\nCover: 1.16683412\nValue: 0.00908000674\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"39\" [label = \"age\nCover: 5.19159269\nGain: 0.000993509195\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"40\" [label = \"income_poverty_ratio\nCover: 31.5898361\nGain: 0.00263882405\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"41\" [label = \"age\nCover: 2.91365457\nGain: 0.00704009179\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"42\" [label = \"genderfemale\nCover: 2.16317415\nGain: 0.000108649401\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"43\" [label = \"age\nCover: 3.02841854\nGain: 0.00141703419\", shape = \"rectangle\", fontcolor = \"black\", fillcolor = \"Beige\"] \n  \"44\" [label = \"Leaf\nCover: 1.33340657\nValue: 0.0101325326\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"45\" [label = \"Leaf\nCover: 30.2564297\nValue: -0.000329456729\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"46\" [label = \"Leaf\nCover: 1.04955447\nValue: -0.0176226739\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"47\" [label = \"Leaf\nCover: 1.8641001\nValue: 0.00576730724\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"48\" [label = \"Leaf\nCover: 1.10688221\nValue: 0.000441855722\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"49\" [label = \"Leaf\nCover: 1.05629182\nValue: 0.00459684944\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"50\" [label = \"Leaf\nCover: 1.09522605\nValue: -0.00930902828\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n  \"51\" [label = \"Leaf\nCover: 1.93319261\nValue: 0.0013697088\", shape = \"oval\", fontcolor = \"black\", fillcolor = \"Khaki\"] \n\"1\"->\"2\" [label = \"< 0.504999995\", style = \"bold\"] \n\"2\"->\"4\" [label = \"< 0.5\", style = \"bold\"] \n\"3\"->\"6\" [label = \"< 0.954999983\", style = \"bold\"] \n\"6\"->\"8\" [label = \"< 57.5\", style = \"bold\"] \n\"7\"->\"10\" [label = \"< 1.91499996\", style = \"bold\"] \n\"8\"->\"12\" [label = \"< 38.5\", style = \"bold\"] \n\"10\"->\"14\" [label = \"< 66.5\", style = \"bold\"] \n\"11\"->\"16\" [label = \"< 2.09499979\", style = \"bold\"] \n\"14\"->\"18\" [label = \"< 1.43499994\", style = \"bold\"] \n\"15\"->\"20\" [label = \"< 1.53499997\", style = \"bold\"] \n\"17\"->\"22\" [label = \"< 2.41499996\", style = \"bold\"] \n\"18\"->\"24\" [label = \"< 1.20500004\", style = \"bold\"] \n\"19\"->\"26\" [label = \"< 0.5\", style = \"bold\"] \n\"22\"->\"28\" [label = \"< 2.30499983\", style = \"bold\"] \n\"23\"->\"30\" [label = \"< 2.63500023\", style = \"bold\"] \n\"24\"->\"32\" [label = \"< 43.5\", style = \"bold\"] \n\"31\"->\"34\" [label = \"< 0.5\", style = \"bold\"] \n\"34\"->\"36\" [label = \"< 2.81500006\", style = \"bold\"] \n\"35\"->\"38\" [label = \"< 4.15499973\", style = \"bold\"] \n\"37\"->\"40\" [label = \"< 0.5\", style = \"bold\"] \n\"39\"->\"42\" [label = \"< 55.5\", style = \"bold\"] \n\"40\"->\"44\" [label = \"< 3.29500008\", style = \"bold\"] \n\"41\"->\"46\" [label = \"< 50.5\", style = \"bold\"] \n\"42\"->\"48\" [label = \"< 0.5\", style = \"bold\"] \n\"43\"->\"50\" [label = \"< 72.5\", style = \"bold\"] \n\"1\"->\"3\" [style = \"bold\", style = \"solid\"] \n\"2\"->\"5\" [style = \"solid\", style = \"solid\"] \n\"3\"->\"7\" [style = \"solid\", style = \"solid\"] \n\"6\"->\"9\" [style = \"solid\", style = \"solid\"] \n\"7\"->\"11\" [style = \"solid\", style = \"solid\"] \n\"8\"->\"13\" [style = \"solid\", style = \"solid\"] \n\"10\"->\"15\" [style = \"solid\", style = \"solid\"] \n\"11\"->\"17\" [style = \"solid\", style = \"solid\"] \n\"14\"->\"19\" [style = \"solid\", style = \"solid\"] \n\"15\"->\"21\" [style = \"solid\", style = \"solid\"] \n\"17\"->\"23\" [style = \"solid\", style = \"solid\"] \n\"18\"->\"25\" [style = \"solid\", style = \"solid\"] \n\"19\"->\"27\" [style = \"solid\", style = \"solid\"] \n\"22\"->\"29\" [style = \"solid\", style = \"solid\"] \n\"23\"->\"31\" [style = \"solid\", style = \"solid\"] \n\"24\"->\"33\" [style = \"solid\", style = \"solid\"] \n\"31\"->\"35\" [style = \"solid\", style = \"solid\"] \n\"34\"->\"37\" [style = \"solid\", style = \"solid\"] \n\"35\"->\"39\" [style = \"solid\", style = \"solid\"] \n\"37\"->\"41\" [style = \"solid\", style = \"solid\"] \n\"39\"->\"43\" [style = \"solid\", style = \"solid\"] \n\"40\"->\"45\" [style = \"solid\", style = \"solid\"] \n\"41\"->\"47\" [style = \"solid\", style = \"solid\"] \n\"42\"->\"49\" [style = \"solid\", style = \"solid\"] \n\"43\"->\"51\" [style = \"solid\", style = \"solid\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<p>According to the XGBoost tree plot above, we can clearly discover how
+the final tree model decides the values on each leaf, which are
+probability estimators based on the logistic function.</p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

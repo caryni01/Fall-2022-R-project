@@ -224,4 +224,4 @@ result_mse %>%
 
 ```
 
-We then use the data from rest of the country to test the performance of the two models in predicting the prevalence of inadequate sleep in other `50` states. The violion plot above shows that the test mean squared error of the elastic net regression and the multiple linear regression model. The statistics show that there is no significant difference between these two models in terms of predictive performance. Therefore, we conclude that both of models could be used for regression analysis.  
+We then use the data from rest of the country to test the performance of the two models in predicting the prevalence of inadequate sleep in other `50` states. The violion plot above shows that the test mean squared error of the elastic net regression and the multiple linear regression model. The statistics show that there is no significant difference between these two models in terms of predictive performance. Therefore, we conclude that both of models could be used for regression analysis while the elastic net model is more preferred since it smaller test MSE (minimal difference though) and retain more information of the potential risk factors. 

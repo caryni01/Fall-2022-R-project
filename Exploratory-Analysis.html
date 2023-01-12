@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Exploratory Analysis</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="Places_data.html">Sleep &amp; Diseases</a>
+</li>
+<li>
+  <a href="Sleep-and-Social-Factors.html">Sleep &amp; Social factors</a>
+</li>
+<li>
+  <a href="app.html">Survey about sleep</a>
+</li>
+<li>
+  <a href="mailto:&lt;wz2631@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://github.com/jchaicc/final.github.io.git">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="References.html">
+    <span class="fa fa-book fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Exploratory Analysis</h1>
+
+</div>
+
+
+<div id="national-trends-in-short-sleep-duration"
+class="section level2">
+<h2>National trends in short sleep duration</h2>
+<p>Short sleep duration is based on age group recommended hours of sleep
+per day and defined as less than 7 hours for adults. This plot shows
+age-adjusted prevalence of adults who reported short sleep duration from
+2013 to 2020. Overall, short sleep duration prevalence was higher among
+males than females across years.</p>
+<pre class="r"><code>year_df=read_csv(&quot;data/AdultTrends.csv&quot;) %&gt;%
+  janitor::clean_names() %&gt;%
+  pivot_longer(cols=c(&quot;female&quot;, &quot;male&quot;),
+               names_to = &quot;sex&quot;,
+               values_to = &quot;age_adjust_prev&quot;) %&gt;%
+  ggplot(aes(x=year,y=age_adjust_prev,col=sex))+geom_line()+geom_point()+labs(
+    title = &quot;National trends in short sleep duration&quot;,
+    x = &quot;Year&quot;,
+    y = &quot;Age Adjusted Prevalence %&quot;
+    )
+
+year_df+transition_reveal(year)</code></pre>
+<p><img src="Exploratory-Analysis_files/figure-html/unnamed-chunk-3-1.gif" width="90%" /></p>
+</div>
+<div id="education-level" class="section level2">
+<h2>Education level</h2>
+<p>We first want to get the distribution of sleeping hours less than 7
+hours across the five different education levels. We will construct a
+bar chart tabulating the average sleeping hours per week in each of the
+five education levels. Gender consideration was also added into to the
+bar chart in order to see a difference between female and male in each
+category.</p>
+<pre class="r"><code> edu_plot=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7)%&gt;%
+  group_by(education_level,gender) %&gt;%
+  summarize(ave_sleep=mean((weekday_slp_hr*5+weekend_slp_hr*2)/7)) %&gt;% 
+  ungroup() %&gt;%
+  mutate(education_level=fct_reorder(education_level,ave_sleep)) %&gt;%
+  ggplot(aes(x=education_level,y=ave_sleep,fill=gender))+ geom_bar(width=0.5,stat=&quot;identity&quot;)+
+  viridis::scale_fill_viridis(
+    name = &quot;gender&quot;,
+    discrete = TRUE
+  ) + geom_text(aes(label = round(ave_sleep, 2)),position = position_stack(vjust=0.9), color = &quot;white&quot;, size = 4)+
+  theme(axis.text.x = element_text(angle = -90, vjust = 0.5, hjust=1))+labs(
+    title = &quot;Distribution of sleeping hours across education level&quot;,
+    x = &quot;Education Level&quot;,
+    y = &quot;Average Sleeping hours per day&quot;
+    )
+edu_plot</code></pre>
+<p><img src="Exploratory-Analysis_files/figure-html/unnamed-chunk-4-1.png" width="90%" /></p>
+<p>From the above plot, high school graduates has the least sleeping
+hours, while college graduates or above has the highest. Female and male
+does not have a significant difference in both groups.</p>
+</div>
+<div id="race" class="section level2">
+<h2>Race</h2>
+<p>A heat map was made to visualize sleeping hours less than 7 hours
+among different races. The below plot indicates that there is a large
+number of people who has a sleeping hour of 6 hours per day among the
+Non-Hispanic black group. There are also many Non-Hispanic Whites who
+has an average of 6 hours per day.</p>
+<pre class="r"><code>race_plot=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(sleep_ave=(weekday_slp_hr*5+weekend_slp_hr*2)/7) %&gt;%
+  group_by(race,sleep_ave) %&gt;%
+  summarise(obs=n()) %&gt;%
+  plot_ly(
+    x = ~sleep_ave, y = ~race, z = ~obs, type = &quot;heatmap&quot;, colors = &quot;BuPu&quot;
+  ) %&gt;%
+  colorbar(title = &quot;Number of People&quot;, x = 1, y = 0.5) 
+layout(race_plot, xaxis = list(title = &quot;Average Sleeping Hours Per Day&quot;), yaxis = list(title = &quot;Race&quot;))</code></pre>
+<<<<<<< Updated upstream
+<div id="htmlwidget-1ec51a52a84e981afa0b" style="width:90%;height:345.6px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ec51a52a84e981afa0b">{"x":{"visdat":{"14cc667d472e":["function () ","plotlyVisDat"]},"cur_data":"14cc667d472e","attrs":{"14cc667d472e":{"x":{},"y":{},"z":{},"colors":"BuPu","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"heatmap"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Average Sleeping Hours Per Day"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Race","type":"category","categoryorder":"array","categoryarray":["Mexican American","Non-Hispanic Asian","Non-Hispanic Black","Non-Hispanic White","Other Hispanic","Other Race"]},"scene":{"zaxis":{"title":"obs"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"Number of People","ticklen":2,"len":0.5,"lenmode":"fraction","y":0.5,"yanchor":"top","x":1},"colorscale":[["0","rgba(247,252,253,1)"],["0.0416666666666667","rgba(239,247,250,1)"],["0.0833333333333333","rgba(232,241,247,1)"],["0.125","rgba(224,236,244,1)"],["0.166666666666667","rgba(213,228,239,1)"],["0.208333333333333","rgba(202,219,235,1)"],["0.25","rgba(191,211,230,1)"],["0.291666666666667","rgba(180,203,226,1)"],["0.333333333333333","rgba(169,196,222,1)"],["0.375","rgba(158,188,218,1)"],["0.416666666666667","rgba(152,175,211,1)"],["0.458333333333333","rgba(146,163,205,1)"],["0.5","rgba(140,150,198,1)"],["0.541666666666667","rgba(141,136,191,1)"],["0.583333333333333","rgba(141,122,184,1)"],["0.625","rgba(140,107,177,1)"],["0.666666666666667","rgba(139,94,170,1)"],["0.708333333333333","rgba(138,80,164,1)"],["0.75","rgba(136,65,157,1)"],["0.791666666666667","rgba(134,52,146,1)"],["0.833333333333333","rgba(132,36,135,1)"],["0.875","rgba(129,15,124,1)"],["0.916666666666667","rgba(111,8,107,1)"],["0.958333333333333","rgba(94,3,91,1)"],["1","rgba(77,0,75,1)"]],"showscale":true,"x":[3.5,3.57142857142857,3.71428571428571,4,4.28571428571429,4.42857142857143,4.5,4.71428571428571,5,5.14285714285714,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3.14285714285714,3.5,4,4.07142857142857,4.14285714285714,4.28571428571429,4.42857142857143,4.85714285714286,4.92857142857143,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.28571428571429,3.5,3.57142857142857,3.85714285714286,3.92857142857143,4,4.07142857142857,4.14285714285714,4.21428571428571,4.28571428571429,4.35714285714286,4.42857142857143,4.5,4.57142857142857,4.64285714285714,4.71428571428571,4.78571428571429,4.85714285714286,4.92857142857143,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.28571428571429,3.5,3.57142857142857,3.71428571428571,3.78571428571429,3.92857142857143,4,4.14285714285714,4.21428571428571,4.28571428571429,4.35714285714286,4.42857142857143,4.5,4.57142857142857,4.64285714285714,4.71428571428571,4.78571428571429,4.85714285714286,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.5,4,4.14285714285714,4.28571428571429,4.5,4.57142857142857,4.71428571428571,4.92857142857143,5,5.07142857142857,5.14285714285714,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.5,3.78571428571429,3.92857142857143,4,4.28571428571429,4.42857142857143,4.57142857142857,4.85714285714286,5,5.14285714285714,5.28571428571429,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.85714285714286,6.92857142857143],"y":["Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race"],"z":[1,1,1,2,4,1,3,1,3,1,1,1,3,1,3,4,1,5,3,14,7,4,11,3,5,14,19,5,11,9,8,12,1,1,5,1,1,3,2,1,1,13,2,1,1,3,5,3,2,2,2,6,23,3,5,2,7,2,5,14,16,8,7,6,7,9,6,3,2,2,4,1,19,2,5,1,15,2,5,10,6,1,13,3,4,5,34,5,12,2,24,2,11,11,20,6,21,10,13,6,69,8,13,10,35,7,24,31,31,19,36,17,30,24,7,2,4,1,3,1,1,17,1,2,3,1,1,11,2,2,1,4,4,52,2,2,4,7,2,5,18,10,3,7,4,10,8,65,10,6,6,31,13,19,59,33,28,23,17,30,26,2,1,6,2,1,3,3,1,3,11,1,1,2,2,2,3,3,2,1,1,4,1,24,1,7,5,10,6,5,18,8,4,8,6,11,5,1,1,1,1,3,2,1,2,1,7,2,1,1,3,2,1,4,2,3,3,11,3,1,2,9,2,6,8,3,3,6,9,6],"type":"heatmap","xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+=======
+<div id="htmlwidget-7766565318c67e8a8271" style="width:90%;height:345.6px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7766565318c67e8a8271">{"x":{"visdat":{"1cf841504c9a":["function () ","plotlyVisDat"]},"cur_data":"1cf841504c9a","attrs":{"1cf841504c9a":{"x":{},"y":{},"z":{},"colors":"BuPu","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"heatmap"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"Average Sleeping Hours Per Day"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Race","type":"category","categoryorder":"array","categoryarray":["Mexican American","Non-Hispanic Asian","Non-Hispanic Black","Non-Hispanic White","Other Hispanic","Other Race"]},"scene":{"zaxis":{"title":"obs"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"colorbar":{"title":"Number of People","ticklen":2,"len":0.5,"lenmode":"fraction","y":0.5,"yanchor":"top","x":1},"colorscale":[["0","rgba(247,252,253,1)"],["0.0416666666666667","rgba(239,247,250,1)"],["0.0833333333333333","rgba(232,241,247,1)"],["0.125","rgba(224,236,244,1)"],["0.166666666666667","rgba(213,228,239,1)"],["0.208333333333333","rgba(202,219,235,1)"],["0.25","rgba(191,211,230,1)"],["0.291666666666667","rgba(180,203,226,1)"],["0.333333333333333","rgba(169,196,222,1)"],["0.375","rgba(158,188,218,1)"],["0.416666666666667","rgba(152,175,211,1)"],["0.458333333333333","rgba(146,163,205,1)"],["0.5","rgba(140,150,198,1)"],["0.541666666666667","rgba(141,136,191,1)"],["0.583333333333333","rgba(141,122,184,1)"],["0.625","rgba(140,107,177,1)"],["0.666666666666667","rgba(139,94,170,1)"],["0.708333333333333","rgba(138,80,164,1)"],["0.75","rgba(136,65,157,1)"],["0.791666666666667","rgba(134,52,146,1)"],["0.833333333333333","rgba(132,36,135,1)"],["0.875","rgba(129,15,124,1)"],["0.916666666666667","rgba(111,8,107,1)"],["0.958333333333333","rgba(94,3,91,1)"],["1","rgba(77,0,75,1)"]],"showscale":true,"x":[3.5,3.57142857142857,3.71428571428571,4,4.28571428571429,4.42857142857143,4.5,4.71428571428571,5,5.14285714285714,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3.14285714285714,3.5,4,4.07142857142857,4.14285714285714,4.28571428571429,4.42857142857143,4.85714285714286,4.92857142857143,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.28571428571429,3.5,3.57142857142857,3.85714285714286,3.92857142857143,4,4.07142857142857,4.14285714285714,4.21428571428571,4.28571428571429,4.35714285714286,4.42857142857143,4.5,4.57142857142857,4.64285714285714,4.71428571428571,4.78571428571429,4.85714285714286,4.92857142857143,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.28571428571429,3.5,3.57142857142857,3.71428571428571,3.78571428571429,3.92857142857143,4,4.14285714285714,4.21428571428571,4.28571428571429,4.35714285714286,4.42857142857143,4.5,4.57142857142857,4.64285714285714,4.71428571428571,4.78571428571429,4.85714285714286,5,5.07142857142857,5.14285714285714,5.21428571428571,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.5,4,4.14285714285714,4.28571428571429,4.5,4.57142857142857,4.71428571428571,4.92857142857143,5,5.07142857142857,5.14285714285714,5.28571428571429,5.35714285714286,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.78571428571429,6.85714285714286,6.92857142857143,3,3.5,3.78571428571429,3.92857142857143,4,4.28571428571429,4.42857142857143,4.57142857142857,4.85714285714286,5,5.14285714285714,5.28571428571429,5.42857142857143,5.5,5.57142857142857,5.64285714285714,5.71428571428571,5.78571428571429,5.85714285714286,5.92857142857143,6,6.07142857142857,6.14285714285714,6.21428571428571,6.28571428571429,6.35714285714286,6.42857142857143,6.5,6.57142857142857,6.64285714285714,6.71428571428571,6.85714285714286,6.92857142857143],"y":["Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Mexican American","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Asian","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic Black","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Non-Hispanic White","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Hispanic","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race","Other Race"],"z":[1,1,1,2,4,1,3,1,3,1,1,1,3,1,3,4,1,5,3,14,7,4,11,3,5,14,19,5,11,9,8,12,1,1,5,1,1,3,2,1,1,13,2,1,1,3,5,3,2,2,2,6,23,3,5,2,7,2,5,14,16,8,7,6,7,9,6,3,2,2,4,1,19,2,5,1,15,2,5,10,6,1,13,3,4,5,34,5,12,2,24,2,11,11,20,6,21,10,13,6,69,8,13,10,35,7,24,31,31,19,36,17,30,24,7,2,4,1,3,1,1,17,1,2,3,1,1,11,2,2,1,4,4,52,2,2,4,7,2,5,18,10,3,7,4,10,8,65,10,6,6,31,13,19,59,33,28,23,17,30,26,2,1,6,2,1,3,3,1,3,11,1,1,2,2,2,3,3,2,1,1,4,1,24,1,7,5,10,6,5,18,8,4,8,6,11,5,1,1,1,1,3,2,1,2,1,7,2,1,1,3,2,1,4,2,3,3,11,3,1,2,9,2,6,8,3,3,6,9,6],"type":"heatmap","xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+>>>>>>> Stashed changes
+<div id="race-gender-gap-by-education-level" class="section level3">
+<h3>Race Gender Gap by Education Level</h3>
+<p>The below plot demonstrates the gender gap in the patients for
+different races. Male outnumber female for sleeping less than 7 hours
+per day for all race, except Non-Hispanic Black and Non-Hispanic Asian.
+The bubble represents the degree of the gap, along inlcuding their
+education level.</p>
+<pre class="r"><code>gender_plot=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  group_by(race,education_level) %&gt;%
+  summarize(total_f=sum(gender==&quot;female&quot;),
+            total_m=sum(gender==&quot;male&quot;),
+            gap=total_m-total_f) %&gt;%
+  mutate(text_lable=str_c(&quot;Race=&quot;,race,&quot;\nEducation level: &quot;, education_level)) %&gt;%
+  plot_ly(x=~total_m,y=~total_f,text=~text_lable,color=~race,size=~gap,type=&quot;scatter&quot;,mode=&quot;markers&quot;,
+          colors=&quot;viridis&quot;,sizes = c(50, 700), marker = list(opacity = 0.7))
+
+layout(gender_plot, title = &quot;Race Gender Gap by Education Level&quot;, xaxis = list(title = &quot;Number of Male Sleeping less than 7 hrs&quot;), yaxis = list(title = &quot;Number of Female Sleeping less than 7 hrs&quot;))</code></pre>
+<<<<<<< Updated upstream
+<div id="htmlwidget-734bf352c716a3068971" style="width:90%;height:345.6px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-734bf352c716a3068971">{"x":{"visdat":{"14cc79e7fc3":["function () ","plotlyVisDat"]},"cur_data":"14cc79e7fc3","attrs":{"14cc79e7fc3":{"x":{},"y":{},"text":{},"mode":"markers","marker":{"opacity":0.7},"color":{},"size":{},"colors":"viridis","alpha_stroke":1,"sizes":[50,700],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Race Gender Gap by Education Level","xaxis":{"domain":[0,1],"automargin":true,"title":"Number of Male Sleeping less than 7 hrs"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number of Female Sleeping less than 7 hrs"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[16,13,26,21,19],"y":[11,4,22,17,13],"text":["Race=Mexican American<br />Education level: 9-11th grade","Race=Mexican American<br />Education level: college graduate or above","Race=Mexican American<br />Education level: college or AA degree","Race=Mexican American<br />Education level: high school graduate","Race=Mexican American<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(68,1,84,1)","size":[241.176470588235,292.156862745098,228.43137254902,228.43137254902,253.921568627451],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(68,1,84,1)"}},"type":"scatter","name":"Mexican American","textfont":{"color":"rgba(68,1,84,1)","size":[241.176470588235,292.156862745098,228.43137254902,228.43137254902,253.921568627451]},"error_y":{"color":"rgba(68,1,84,1)","width":[]},"error_x":{"color":"rgba(68,1,84,1)","width":[]},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[6,42,20,6,2],"y":[10,37,21,15,11],"text":["Race=Non-Hispanic Asian<br />Education level: 9-11th grade","Race=Non-Hispanic Asian<br />Education level: college graduate or above","Race=Non-Hispanic Asian<br />Education level: college or AA degree","Race=Non-Hispanic Asian<br />Education level: high school graduate","Race=Non-Hispanic Asian<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(65,68,135,1)","size":[126.470588235294,241.176470588235,164.705882352941,62.7450980392157,62.7450980392157],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(65,68,135,1)"}},"type":"scatter","name":"Non-Hispanic Asian","textfont":{"color":"rgba(65,68,135,1)","size":[126.470588235294,241.176470588235,164.705882352941,62.7450980392157,62.7450980392157]},"error_y":{"color":"rgba(65,68,135,1)","width":[]},"error_x":{"color":"rgba(65,68,135,1)","width":[]},"line":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[34,65,131,101,11],"y":[29,75,133,60,1],"text":["Race=Non-Hispanic Black<br />Education level: 9-11th grade","Race=Non-Hispanic Black<br />Education level: college graduate or above","Race=Non-Hispanic Black<br />Education level: college or AA degree","Race=Non-Hispanic Black<br />Education level: high school graduate","Race=Non-Hispanic Black<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(42,120,142,1)","size":[241.176470588235,50,151.960784313725,700,304.901960784314],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(42,120,142,1)"}},"type":"scatter","name":"Non-Hispanic Black","textfont":{"color":"rgba(42,120,142,1)","size":[241.176470588235,50,151.960784313725,700,304.901960784314]},"error_y":{"color":"rgba(42,120,142,1)","width":[]},"error_x":{"color":"rgba(42,120,142,1)","width":[]},"line":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[32,65,126,89,11],"y":[36,41,102,65,1],"text":["Race=Non-Hispanic White<br />Education level: 9-11th grade","Race=Non-Hispanic White<br />Education level: college graduate or above","Race=Non-Hispanic White<br />Education level: college or AA degree","Race=Non-Hispanic White<br />Education level: high school graduate","Race=Non-Hispanic White<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(34,168,132,1)","size":[126.470588235294,483.333333333333,483.333333333333,483.333333333333,304.901960784314],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(34,168,132,1)"}},"type":"scatter","name":"Non-Hispanic White","textfont":{"color":"rgba(34,168,132,1)","size":[126.470588235294,483.333333333333,483.333333333333,483.333333333333,304.901960784314]},"error_y":{"color":"rgba(34,168,132,1)","width":[]},"error_x":{"color":"rgba(34,168,132,1)","width":[]},"line":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[13,18,27,19,16],"y":[7,16,23,14,21],"text":["Race=Other Hispanic<br />Education level: 9-11th grade","Race=Other Hispanic<br />Education level: college graduate or above","Race=Other Hispanic<br />Education level: college or AA degree","Race=Other Hispanic<br />Education level: high school graduate","Race=Other Hispanic<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(122,209,81,1)","size":[253.921568627451,202.941176470588,228.43137254902,241.176470588235,113.725490196078],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(122,209,81,1)"}},"type":"scatter","name":"Other Hispanic","textfont":{"color":"rgba(122,209,81,1)","size":[253.921568627451,202.941176470588,228.43137254902,241.176470588235,113.725490196078]},"error_y":{"color":"rgba(122,209,81,1)","width":[]},"error_x":{"color":"rgba(122,209,81,1)","width":[]},"line":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[9,9,25,18,2],"y":[2,11,23,12,0],"text":["Race=Other Race<br />Education level: 9-11th grade","Race=Other Race<br />Education level: college graduate or above","Race=Other Race<br />Education level: college or AA degree","Race=Other Race<br />Education level: high school graduate","Race=Other Race<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(253,231,37,1)","size":[266.666666666667,151.960784313725,202.941176470588,253.921568627451,202.941176470588],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(253,231,37,1)"}},"type":"scatter","name":"Other Race","textfont":{"color":"rgba(253,231,37,1)","size":[266.666666666667,151.960784313725,202.941176470588,253.921568627451,202.941176470588]},"error_y":{"color":"rgba(253,231,37,1)","width":[]},"error_x":{"color":"rgba(253,231,37,1)","width":[]},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+=======
+<div id="htmlwidget-99636551ede1234a8602" style="width:90%;height:345.6px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-99636551ede1234a8602">{"x":{"visdat":{"1cf870862937":["function () ","plotlyVisDat"]},"cur_data":"1cf870862937","attrs":{"1cf870862937":{"x":{},"y":{},"text":{},"mode":"markers","marker":{"opacity":0.7},"color":{},"size":{},"colors":"viridis","alpha_stroke":1,"sizes":[50,700],"spans":[1,20],"type":"scatter"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Race Gender Gap by Education Level","xaxis":{"domain":[0,1],"automargin":true,"title":"Number of Male Sleeping less than 7 hrs"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number of Female Sleeping less than 7 hrs"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[16,13,26,21,19],"y":[11,4,22,17,13],"text":["Race=Mexican American<br />Education level: 9-11th grade","Race=Mexican American<br />Education level: college graduate or above","Race=Mexican American<br />Education level: college or AA degree","Race=Mexican American<br />Education level: high school graduate","Race=Mexican American<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(68,1,84,1)","size":[241.176470588235,292.156862745098,228.43137254902,228.43137254902,253.921568627451],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(68,1,84,1)"}},"type":"scatter","name":"Mexican American","textfont":{"color":"rgba(68,1,84,1)","size":[241.176470588235,292.156862745098,228.43137254902,228.43137254902,253.921568627451]},"error_y":{"color":"rgba(68,1,84,1)","width":[]},"error_x":{"color":"rgba(68,1,84,1)","width":[]},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[6,42,20,6,2],"y":[10,37,21,15,11],"text":["Race=Non-Hispanic Asian<br />Education level: 9-11th grade","Race=Non-Hispanic Asian<br />Education level: college graduate or above","Race=Non-Hispanic Asian<br />Education level: college or AA degree","Race=Non-Hispanic Asian<br />Education level: high school graduate","Race=Non-Hispanic Asian<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(65,68,135,1)","size":[126.470588235294,241.176470588235,164.705882352941,62.7450980392157,62.7450980392157],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(65,68,135,1)"}},"type":"scatter","name":"Non-Hispanic Asian","textfont":{"color":"rgba(65,68,135,1)","size":[126.470588235294,241.176470588235,164.705882352941,62.7450980392157,62.7450980392157]},"error_y":{"color":"rgba(65,68,135,1)","width":[]},"error_x":{"color":"rgba(65,68,135,1)","width":[]},"line":{"color":"rgba(65,68,135,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[34,65,131,101,11],"y":[29,75,133,60,1],"text":["Race=Non-Hispanic Black<br />Education level: 9-11th grade","Race=Non-Hispanic Black<br />Education level: college graduate or above","Race=Non-Hispanic Black<br />Education level: college or AA degree","Race=Non-Hispanic Black<br />Education level: high school graduate","Race=Non-Hispanic Black<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(42,120,142,1)","size":[241.176470588235,50,151.960784313725,700,304.901960784314],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(42,120,142,1)"}},"type":"scatter","name":"Non-Hispanic Black","textfont":{"color":"rgba(42,120,142,1)","size":[241.176470588235,50,151.960784313725,700,304.901960784314]},"error_y":{"color":"rgba(42,120,142,1)","width":[]},"error_x":{"color":"rgba(42,120,142,1)","width":[]},"line":{"color":"rgba(42,120,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[32,65,126,89,11],"y":[36,41,102,65,1],"text":["Race=Non-Hispanic White<br />Education level: 9-11th grade","Race=Non-Hispanic White<br />Education level: college graduate or above","Race=Non-Hispanic White<br />Education level: college or AA degree","Race=Non-Hispanic White<br />Education level: high school graduate","Race=Non-Hispanic White<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(34,168,132,1)","size":[126.470588235294,483.333333333333,483.333333333333,483.333333333333,304.901960784314],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(34,168,132,1)"}},"type":"scatter","name":"Non-Hispanic White","textfont":{"color":"rgba(34,168,132,1)","size":[126.470588235294,483.333333333333,483.333333333333,483.333333333333,304.901960784314]},"error_y":{"color":"rgba(34,168,132,1)","width":[]},"error_x":{"color":"rgba(34,168,132,1)","width":[]},"line":{"color":"rgba(34,168,132,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[13,18,27,19,16],"y":[7,16,23,14,21],"text":["Race=Other Hispanic<br />Education level: 9-11th grade","Race=Other Hispanic<br />Education level: college graduate or above","Race=Other Hispanic<br />Education level: college or AA degree","Race=Other Hispanic<br />Education level: high school graduate","Race=Other Hispanic<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(122,209,81,1)","size":[253.921568627451,202.941176470588,228.43137254902,241.176470588235,113.725490196078],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(122,209,81,1)"}},"type":"scatter","name":"Other Hispanic","textfont":{"color":"rgba(122,209,81,1)","size":[253.921568627451,202.941176470588,228.43137254902,241.176470588235,113.725490196078]},"error_y":{"color":"rgba(122,209,81,1)","width":[]},"error_x":{"color":"rgba(122,209,81,1)","width":[]},"line":{"color":"rgba(122,209,81,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[9,9,25,18,2],"y":[2,11,23,12,0],"text":["Race=Other Race<br />Education level: 9-11th grade","Race=Other Race<br />Education level: college graduate or above","Race=Other Race<br />Education level: college or AA degree","Race=Other Race<br />Education level: high school graduate","Race=Other Race<br />Education level: less than 9th grade"],"mode":"markers","marker":{"color":"rgba(253,231,37,1)","size":[266.666666666667,151.960784313725,202.941176470588,253.921568627451,202.941176470588],"sizemode":"area","opacity":0.7,"line":{"color":"rgba(253,231,37,1)"}},"type":"scatter","name":"Other Race","textfont":{"color":"rgba(253,231,37,1)","size":[266.666666666667,151.960784313725,202.941176470588,253.921568627451,202.941176470588]},"error_y":{"color":"rgba(253,231,37,1)","width":[]},"error_x":{"color":"rgba(253,231,37,1)","width":[]},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+>>>>>>> Stashed changes
+</div>
+</div>
+<div id="poverty-status" class="section level2">
+<h2>Poverty Status</h2>
+<p>We can observe that people who are in poverty tend to have less
+sleeping hours than those who are not in poverty.</p>
+<pre class="r"><code>income_df=slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(ip_stat=case_when(income_poverty_ratio &gt; 1 ~ &quot;not in poverty&quot;,
+                           income_poverty_ratio &lt; 1~ &quot;in poverty&quot;,
+                           income_poverty_ratio == 1~ &quot;in poverty&quot;)) %&gt;%
+  ggplot(aes(x=weekday_slp_hr,y=ip_stat,fill=ip_stat))+
+  geom_density_ridges(
+    aes(point_color = ip_stat, point_shape = ip_stat,point_fill=ip_stat),
+    alpha = .3, point_alpha = 0.7)+
+   scale_x_continuous(
+    breaks = c(2, 4, 6), 
+    labels = c(&quot;2hrs&quot;, &quot;4hrs&quot;, &quot;6hrs&quot;),
+    limits = c(2, 6)
+    )+labs(
+    x = &quot; Average Sleeping Hours&quot;
+    )
+  
+box_plot=
+  slp_df %&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(ip_stat=case_when(income_poverty_ratio &gt; 1 ~ &quot;not in poverty&quot;,
+                           income_poverty_ratio &lt; 1~ &quot;in poverty&quot;,
+                           income_poverty_ratio == 1~ &quot;in poverty&quot;)) %&gt;%
+  mutate(sleep_ave=(weekday_slp_hr*5+weekend_slp_hr*2)/7) %&gt;%
+  ggplot(aes(x=ip_stat,y=sleep_ave))+geom_boxplot(aes(fill = ip_stat), alpha = 0.3)+
+  geom_hline(aes(yintercept=median(sleep_ave),
+            color=&quot;red&quot;, linetype=&quot;dashed&quot;))+
+  geom_text(aes(0, median(ave_slp_hr), label = &quot;sleep hours median&quot;), vjust = -0.5, hjust = 0, color = &quot;red&quot;)+labs(
+    x = &quot; Poverty Status&quot;,
+    y = &quot;Average Sleeping Hours&quot;
+    )
+
+comb=income_df+box_plot
+comb+plot_annotation(
+  title = &quot;Sleeping Hours By Poverty Status&quot;
+) </code></pre>
+<p><img src="Exploratory-Analysis_files/figure-html/unnamed-chunk-7-1.png" width="90%" /></p>
+</div>
+<div id="age" class="section level2">
+<h2>Age</h2>
+<p>A bar plot was made to see the distribution of average sleeping hours
+less than 7 hours in different age groups. People age between 71 and 80
+has the least sleeping hours with about 5.68 hours per day.</p>
+<pre class="r"><code>age_group= slp_df%&gt;%
+  filter(ave_slp_hr&lt;7) %&gt;%
+  mutate(age_gp=case_when(age&gt;=20 &amp; age&lt;=30 ~ &quot;20-30&quot;,
+                          age&gt;=31 &amp;age &lt;=40 ~ &quot;31-40&quot;,
+                          age&gt;=41 &amp;age&lt;=50 ~ &quot;41-50&quot;,
+                          age&gt;=51 &amp;age&lt;=60 ~ &quot;51-60&quot;,
+                          age&gt;=61 &amp;age&lt;=70 ~ &quot;61-70&quot;,
+                          age&gt;=71 &amp; age &lt;=80 ~ &quot;71-80&quot;)) %&gt;%
+  group_by(age_gp) %&gt;%
+  summarise(ave_slp=mean((weekday_slp_hr*5+weekend_slp_hr*2)/7))%&gt;%
+  ungroup() %&gt;%
+  mutate(age_gp=fct_reorder(age_gp,ave_slp)) %&gt;%
+  ggplot(aes(x=age_gp,y=ave_slp,fill=age_gp))+ geom_bar(stat=&quot;identity&quot;)+ scale_fill_viridis_d()+
+  theme(axis.text.x = element_text(angle = -90, vjust = 0.5, hjust=1))+
+  geom_text(aes(label = round(ave_slp, 2)),position = position_stack(vjust=0.9), color = &quot;white&quot;, size = 4)+labs(x=&quot;Age Group&quot;,y=&quot;Average Sleeping Hours Per Day&quot;,title=&quot;Distribution of Sleeping Hours across Age Group&quot;)
+age_group</code></pre>
+<p><img src="Exploratory-Analysis_files/figure-html/unnamed-chunk-8-1.png" width="90%" /></p>
+</div>
+<div id="models" class="section level2">
+<h2>Models</h2>
+<div id="tidy-data" class="section level3">
+<h3>tidy data</h3>
+<pre class="r"><code>df_mod = slp_df %&gt;% 
+  select(gender, age, race, education_level, income_poverty_ratio, trouble_slp, sleepy_freq, ave_slp_hr)</code></pre>
+</div>
+<div id="split-data" class="section level3">
+<h3>split data</h3>
+<pre class="r"><code>set.seed(1)
+rt = 0.8
+sub = sample(1:nrow(df_mod), round(nrow(df_mod)*rt))
+data_train = df_mod[sub,]
+data_test = df_mod[-sub,]
+dim(data_train)</code></pre>
+<pre><code>## [1] 6132    8</code></pre>
+<pre class="r"><code>dim(data_test)</code></pre>
+<pre><code>## [1] 1533    8</code></pre>
+</div>
+<div id="initial-mlr-and-logistic-models" class="section level3">
+<h3>initial MLR and Logistic models</h3>
+<pre class="r"><code>lmraw = lm(ave_slp_hr ~ ., data = df_mod)
+summary(lmraw)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ave_slp_hr ~ ., data = df_mod)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.1180 -0.8422  0.0061  0.8533  6.2120 
+## 
+## Coefficients:
+##                                            Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)                               8.0250802  0.1017414  78.877  &lt; 2e-16
+## gendermale                               -0.3011581  0.0336011  -8.963  &lt; 2e-16
+## age                                       0.0004406  0.0009877   0.446 0.655542
+## raceNon-Hispanic Asian                   -0.0825071  0.0731715  -1.128 0.259531
+## raceNon-Hispanic Black                   -0.3083095  0.0624298  -4.939 8.04e-07
+## raceNon-Hispanic White                    0.0022257  0.0608437   0.037 0.970820
+## raceOther Hispanic                       -0.1204474  0.0737148  -1.634 0.102308
+## raceOther Race                           -0.1085581  0.0925042  -1.174 0.240613
+## education_levelcollege graduate or above -0.1813153  0.0668176  -2.714 0.006671
+## education_levelcollege or AA degree      -0.2193954  0.0602167  -3.643 0.000271
+## education_leveldon&#39;t know                 0.0650957  0.8437607   0.077 0.938507
+## education_levelhigh school graduate      -0.1101446  0.0616165  -1.788 0.073883
+## education_levelless than 9th grade       -0.0048403  0.0835684  -0.058 0.953813
+## education_levelrefused                   -1.3194891  1.4584543  -0.905 0.365644
+## income_poverty_ratio                     -0.0478507  0.0119533  -4.003 6.31e-05
+## trouble_slpyes                           -0.1322831  0.0385450  -3.432 0.000603
+## sleepy_freq2-4 per month                  0.3390279  0.0655510   5.172 2.38e-07
+## sleepy_freq5-15 per month                 0.1759717  0.0704538   2.498 0.012521
+## sleepy_freqnever                          0.3863911  0.0724932   5.330 1.01e-07
+## sleepy_freqonce a month                   0.3496007  0.0686706   5.091 3.65e-07
+##                                             
+## (Intercept)                              ***
+## gendermale                               ***
+## age                                         
+## raceNon-Hispanic Asian                      
+## raceNon-Hispanic Black                   ***
+## raceNon-Hispanic White                      
+## raceOther Hispanic                          
+## raceOther Race                              
+## education_levelcollege graduate or above ** 
+## education_levelcollege or AA degree      ***
+## education_leveldon&#39;t know                   
+## education_levelhigh school graduate      .  
+## education_levelless than 9th grade          
+## education_levelrefused                      
+## income_poverty_ratio                     ***
+## trouble_slpyes                           ***
+## sleepy_freq2-4 per month                 ***
+## sleepy_freq5-15 per month                *  
+## sleepy_freqnever                         ***
+## sleepy_freqonce a month                  ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.456 on 7645 degrees of freedom
+## Multiple R-squared:  0.02952,    Adjusted R-squared:  0.02711 
+## F-statistic: 12.24 on 19 and 7645 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The MLR model is <span
+class="math inline">\(sleep\_hour=8.03-0.30I(gender = male)-0.31I(race =
+Non-Hispanic Black)-0.18I(education_level = college graduate or
+above)-0.22I(education_level = college or AA
+degree)-0.05income_poverty_ratio-0.13trouble_slpyes+0.34I(sleepy_freq =
+2-4 per month)+0.18I(sleepy_freq = 5-15 per month)+0.39I(sleepy_freq =
+freqnever)+0.35I(sleepy_freq = freqonce a month)\)</span></p>
+<pre class="r"><code>par(mfrow = c(2,2))
+plot(lmraw, cex.lab = 1)</code></pre>
+<p><img src="Exploratory-Analysis_files/figure-html/unnamed-chunk-12-1.png" width="90%" /></p>
+</div>
+<div id="test-model" class="section level3">
+<h3>test model</h3>
+<pre class="r"><code>set.seed(1)
+train = trainControl(method = &quot;cv&quot;, number = 100)
+model_caret = train(ave_slp_hr ~ ., data = df_mod, method = &#39;lm&#39;, na.action = na.pass)
+model_caret$finalModel</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = .outcome ~ ., data = dat)
+## 
+## Coefficients:
+##                                (Intercept)  
+##                                  8.0250802  
+##                                 gendermale  
+##                                 -0.3011581  
+##                                        age  
+##                                  0.0004406  
+##                   `raceNon-Hispanic Asian`  
+##                                 -0.0825071  
+##                   `raceNon-Hispanic Black`  
+##                                 -0.3083095  
+##                   `raceNon-Hispanic White`  
+##                                  0.0022257  
+##                       `raceOther Hispanic`  
+##                                 -0.1204474  
+##                           `raceOther Race`  
+##                                 -0.1085581  
+## `education_levelcollege graduate or above`  
+##                                 -0.1813153  
+##      `education_levelcollege or AA degree`  
+##                                 -0.2193954  
+##                `education_leveldon&#39;t know`  
+##                                  0.0650957  
+##      `education_levelhigh school graduate`  
+##                                 -0.1101446  
+##       `education_levelless than 9th grade`  
+##                                 -0.0048403  
+##                     education_levelrefused  
+##                                 -1.3194891  
+##                       income_poverty_ratio  
+##                                 -0.0478507  
+##                             trouble_slpyes  
+##                                 -0.1322831  
+##                 `sleepy_freq2-4 per month`  
+##                                  0.3390279  
+##                `sleepy_freq5-15 per month`  
+##                                  0.1759717  
+##                           sleepy_freqnever  
+##                                  0.3863911  
+##                  `sleepy_freqonce a month`  
+##                                  0.3496007</code></pre>
+<pre class="r"><code>model_caret</code></pre>
+<pre><code>## Linear Regression 
+## 
+## 7665 samples
+##    7 predictor
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 7665, 7665, 7665, 7665, 7665, 7665, ... 
+## Resampling results:
+## 
+##   RMSE      Rsquared   MAE     
+##   1.460102  0.0236158  1.104461
+## 
+## Tuning parameter &#39;intercept&#39; was held constant at a value of TRUE</code></pre>
+<pre class="r"><code># raw_pred = predict(lmraw, newdata = data_test)</code></pre>
+<pre class="r"><code># res_raw = residuals(lmraw)
+# segments(obs, pred, obs, pred_res)</code></pre>
+<pre class="r"><code>slp_suf_df = df_mod %&gt;% 
+  mutate(sufficient_slp = ifelse((ave_slp_hr &gt;= 7), 1, 0))
+glmraw = glm(sufficient_slp ~ ., data = slp_suf_df, family = binomial)
+summary(glmraw)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = sufficient_slp ~ ., family = binomial, data = slp_suf_df)
+## 
+## Deviance Residuals: 
+##        Min          1Q      Median          3Q         Max  
+## -5.748e-04   2.000e-08   2.000e-08   2.000e-08   2.643e-04  
+## 
+## Coefficients:
+##                                            Estimate Std. Error z value Pr(&gt;|z|)
+## (Intercept)                              -3.449e+03  4.436e+04  -0.078    0.938
+## gendermale                               -4.481e-02  4.826e+02   0.000    1.000
+## age                                       2.669e-02  1.577e+01   0.002    0.999
+## raceNon-Hispanic Asian                    6.885e-01  9.403e+02   0.001    0.999
+## raceNon-Hispanic Black                    1.082e-01  8.233e+02   0.000    1.000
+## raceNon-Hispanic White                    4.146e-01  8.348e+02   0.000    1.000
+## raceOther Hispanic                        4.428e-01  1.067e+03   0.000    1.000
+## raceOther Race                            4.437e-01  1.179e+03   0.000    1.000
+## education_levelcollege graduate or above -6.476e-02  1.120e+03   0.000    1.000
+## education_levelcollege or AA degree       1.591e-01  1.071e+03   0.000    1.000
+## education_leveldon&#39;t know                 5.690e+00  1.588e+05   0.000    1.000
+## education_levelhigh school graduate       5.788e-02  1.081e+03   0.000    1.000
+## education_levelless than 9th grade        1.260e-01  1.408e+03   0.000    1.000
+## education_levelrefused                    6.424e+00  3.561e+05   0.000    1.000
+## income_poverty_ratio                     -1.996e-01  1.626e+02  -0.001    0.999
+## trouble_slpyes                           -1.329e-01  5.411e+02   0.000    1.000
+## sleepy_freq2-4 per month                  3.671e-01  9.278e+02   0.000    1.000
+## sleepy_freq5-15 per month                 2.361e-01  9.849e+02   0.000    1.000
+## sleepy_freqnever                          1.096e+00  1.116e+03   0.001    0.999
+## sleepy_freqonce a month                   1.717e-01  9.592e+02   0.000    1.000
+## ave_slp_hr                                4.951e+02  6.369e+03   0.078    0.938
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 8.4142e+03  on 7664  degrees of freedom
+## Residual deviance: 1.4287e-05  on 7644  degrees of freedom
+## AIC: 42
+## 
+## Number of Fisher Scoring iterations: 25</code></pre>
+<pre class="r"><code># windows(width = 5, height = 5)
+# plot(glmraw, cex.lab = 1)</code></pre>
+</div>
+<div id="refine-linear-model-using-stepwise-method"
+class="section level3">
+<h3>refine linear model using stepwise method</h3>
+<pre class="r"><code>lm0 = lm(ave_slp_hr ~ 1, data = df_mod)
+lmstep = step(lm0, direction = &#39;both&#39;, scope=formula(lmraw), trace=0)
+summary(lmstep)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = ave_slp_hr ~ gender + race + sleepy_freq + income_poverty_ratio + 
+##     trouble_slp + education_level, data = df_mod)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.1241 -0.8428  0.0051  0.8539  6.2245 
+## 
+## Coefficients:
+##                                           Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)                               8.043723   0.092757  86.718  &lt; 2e-16
+## gendermale                               -0.300969   0.033597  -8.958  &lt; 2e-16
+## raceNon-Hispanic Asian                   -0.080951   0.073084  -1.108 0.268056
+## raceNon-Hispanic Black                   -0.305273   0.062054  -4.919 8.86e-07
+## raceNon-Hispanic White                    0.007182   0.059818   0.120 0.904435
+## raceOther Hispanic                       -0.118547   0.073588  -1.611 0.107231
+## raceOther Race                           -0.106904   0.092425  -1.157 0.247448
+## sleepy_freq2-4 per month                  0.339109   0.065547   5.174 2.36e-07
+## sleepy_freq5-15 per month                 0.175304   0.070434   2.489 0.012835
+## sleepy_freqnever                          0.388044   0.072395   5.360 8.56e-08
+## sleepy_freqonce a month                   0.350574   0.068632   5.108 3.33e-07
+## income_poverty_ratio                     -0.047351   0.011900  -3.979 6.98e-05
+## trouble_slpyes                           -0.130340   0.038296  -3.403 0.000669
+## education_levelcollege graduate or above -0.183822   0.066577  -2.761 0.005776
+## education_levelcollege or AA degree      -0.222044   0.059920  -3.706 0.000212
+## education_leveldon&#39;t know                 0.067384   0.843701   0.080 0.936345
+## education_levelhigh school graduate      -0.111391   0.061550  -1.810 0.070372
+## education_levelless than 9th grade       -0.001673   0.083262  -0.020 0.983967
+## education_levelrefused                   -1.320511   1.458376  -0.905 0.365247
+##                                             
+## (Intercept)                              ***
+## gendermale                               ***
+## raceNon-Hispanic Asian                      
+## raceNon-Hispanic Black                   ***
+## raceNon-Hispanic White                      
+## raceOther Hispanic                          
+## raceOther Race                              
+## sleepy_freq2-4 per month                 ***
+## sleepy_freq5-15 per month                *  
+## sleepy_freqnever                         ***
+## sleepy_freqonce a month                  ***
+## income_poverty_ratio                     ***
+## trouble_slpyes                           ***
+## education_levelcollege graduate or above ** 
+## education_levelcollege or AA degree      ***
+## education_leveldon&#39;t know                   
+## education_levelhigh school graduate      .  
+## education_levelless than 9th grade          
+## education_levelrefused                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.456 on 7646 degrees of freedom
+## Multiple R-squared:  0.02949,    Adjusted R-squared:  0.02721 
+## F-statistic: 12.91 on 18 and 7646 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The model after stepwise both direction is <span
+class="math inline">\(sleep\_hour=8.04-0.30I(gender = male)-0.30I(race =
+Non-Hispanic Black)+ 0.34I(sleepy_freq = 2-4 per
+month)+0.18I(sleepy_freq = 5-15 per month)+0.39I(sleepy_freq =
+freqnever)+0.35I(sleepy_freq = freqonce a
+month)-0.05income_poverty_ratio-0.13trouble_slpyes-0.18I(education_level
+= college graduate or above)-0.22I(education_level = college or AA
+degree)\)</span></p>
+</div>
+<div id="adjust-r2-cp" class="section level3">
+<h3>adjust R2 Cp</h3>
+<pre class="r"><code># par(mfrow = c(1,1))
+# leaps = regsubsets(ave_slp_hr ~ ., data = df_mod, nbest=20)
+# plot(leaps, scale = &#39;adjr2&#39;)</code></pre>
+</div>
+<div id="xgboost" class="section level3">
+<h3>xgboost</h3>
+<div id="data-preparation" class="section level4">
+<h4>data preparation</h4>
+<pre class="r"><code>clafeats = c(&#39;gender&#39;, &#39;race&#39;, &#39;education_level&#39;, &#39;trouble_slp&#39;, &#39;sleepy_freq&#39;)
+dums = dummyVars(~ gender + race + education_level + trouble_slp + sleepy_freq, data = df_mod)
+slp_oh = as.data.frame(predict(dums, newdata = df_mod))
+slp_df_new =cbind(df_mod[,-c(which(colnames(df_mod) %in% clafeats))],slp_oh)</code></pre>
+<pre class="r"><code>set.seed(1)
+rtxg = 0.8
+subxg = sample(1:nrow(slp_df_new), round(nrow(slp_df_new)*rt))
+data_trainxg = slp_df_new[sub,]
+data_testxg = slp_df_new[-sub,]
+dim(data_trainxg)</code></pre>
+<pre><code>## [1] 6132   25</code></pre>
+<pre class="r"><code>dim(data_testxg)</code></pre>
+<pre><code>## [1] 1533   25</code></pre>
+<pre class="r"><code>data_trainx = data_trainxg[,-3]
+data_trainy = data.frame(data_trainxg[,3])
+names(data_trainy) = c(&#39;label&#39;)
+data_testx = data_testxg[,-3]
+data_testy = data.frame(data_testxg[,3])
+names(data_testy) = c(&#39;label&#39;)</code></pre>
+<pre class="r"><code># train_slp = list(data=data_trainx[,-1],label=data_trainy$label) 
+# test_slp = list(data=data_testx[,-1],label=data_testy$label) 
+dtrain = xgb.DMatrix(data = as.matrix(data_trainx), label = data_trainy$label)
+dtest = xgb.DMatrix(data = as.matrix(data_testx), label = data_testy$label)</code></pre>
+</div>
+<div id="model-training" class="section level4">
+<h4>model training</h4>
+<pre class="r"><code># xgb0 =  xgboost(
+#     data = dtrain,
+#     nrounds = 2000,
+#     objective = &quot;reg:squarederror&quot;,
+#     early_stopping_rounds = 3,
+#     max_depth = 6,
+#     eta = .25
+#   )   
+# print(xgb0)</code></pre>
+<pre class="r"><code>xgb1 = xgboost(data = dtrain, max.depth = 10, nrounds = 300)</code></pre>
+<pre><code>## [1]  train-rmse:5.308995 
+## [2]  train-rmse:3.858269 
+## [3]  train-rmse:2.886284 
+## [4]  train-rmse:2.245182 
+## [5]  train-rmse:1.829713 
+## [6]  train-rmse:1.563952 
+## [7]  train-rmse:1.392055 
+## [8]  train-rmse:1.288338 
+## [9]  train-rmse:1.196116 
+## [10] train-rmse:1.145216 
+## [11] train-rmse:1.099318 
+## [12] train-rmse:1.067830 
+## [13] train-rmse:1.049116 
+## [14] train-rmse:1.017877 
+## [15] train-rmse:0.991405 
+## [16] train-rmse:0.978619 
+## [17] train-rmse:0.946701 
+## [18] train-rmse:0.929606 
+## [19] train-rmse:0.917407 
+## [20] train-rmse:0.895506 
+## [21] train-rmse:0.880546 
+## [22] train-rmse:0.846006 
+## [23] train-rmse:0.817986 
+## [24] train-rmse:0.789218 
+## [25] train-rmse:0.773734 
+## [26] train-rmse:0.768133 
+## [27] train-rmse:0.751800 
+## [28] train-rmse:0.733366 
+## [29] train-rmse:0.714330 
+## [30] train-rmse:0.700871 
+## [31] train-rmse:0.699048 
+## [32] train-rmse:0.687810 
+## [33] train-rmse:0.674260 
+## [34] train-rmse:0.663500 
+## [35] train-rmse:0.649702 
+## [36] train-rmse:0.632670 
+## [37] train-rmse:0.624316 
+## [38] train-rmse:0.618072 
+## [39] train-rmse:0.598711 
+## [40] train-rmse:0.580068 
+## [41] train-rmse:0.571179 
+## [42] train-rmse:0.565043 
+## [43] train-rmse:0.555764 
+## [44] train-rmse:0.552828 
+## [45] train-rmse:0.547112 
+## [46] train-rmse:0.526388 
+## [47] train-rmse:0.508920 
+## [48] train-rmse:0.505224 
+## [49] train-rmse:0.496811 
+## [50] train-rmse:0.485498 
+## [51] train-rmse:0.479899 
+## [52] train-rmse:0.471725 
+## [53] train-rmse:0.466391 
+## [54] train-rmse:0.461427 
+## [55] train-rmse:0.445579 
+## [56] train-rmse:0.434203 
+## [57] train-rmse:0.421850 
+## [58] train-rmse:0.416001 
+## [59] train-rmse:0.414282 
+## [60] train-rmse:0.408379 
+## [61] train-rmse:0.405502 
+## [62] train-rmse:0.400294 
+## [63] train-rmse:0.390322 
+## [64] train-rmse:0.387858 
+## [65] train-rmse:0.379002 
+## [66] train-rmse:0.374546 
+## [67] train-rmse:0.367244 
+## [68] train-rmse:0.363043 
+## [69] train-rmse:0.359578 
+## [70] train-rmse:0.356745 
+## [71] train-rmse:0.353339 
+## [72] train-rmse:0.341020 
+## [73] train-rmse:0.337169 
+## [74] train-rmse:0.333815 
+## [75] train-rmse:0.330953 
+## [76] train-rmse:0.326217 
+## [77] train-rmse:0.325415 
+## [78] train-rmse:0.320496 
+## [79] train-rmse:0.312095 
+## [80] train-rmse:0.307786 
+## [81] train-rmse:0.303101 
+## [82] train-rmse:0.298793 
+## [83] train-rmse:0.295484 
+## [84] train-rmse:0.294416 
+## [85] train-rmse:0.287551 
+## [86] train-rmse:0.285232 
+## [87] train-rmse:0.281262 
+## [88] train-rmse:0.279899 
+## [89] train-rmse:0.278293 
+## [90] train-rmse:0.275461 
+## [91] train-rmse:0.273785 
+## [92] train-rmse:0.269553 
+## [93] train-rmse:0.268639 
+## [94] train-rmse:0.266809 
+## [95] train-rmse:0.262565 
+## [96] train-rmse:0.261277 
+## [97] train-rmse:0.259774 
+## [98] train-rmse:0.258482 
+## [99] train-rmse:0.257647 
+## [100]    train-rmse:0.251650 
+## [101]    train-rmse:0.249392 
+## [102]    train-rmse:0.245773 
+## [103]    train-rmse:0.242933 
+## [104]    train-rmse:0.241774 
+## [105]    train-rmse:0.239926 
+## [106]    train-rmse:0.238836 
+## [107]    train-rmse:0.238597 
+## [108]    train-rmse:0.238210 
+## [109]    train-rmse:0.236929 
+## [110]    train-rmse:0.236801 
+## [111]    train-rmse:0.229160 
+## [112]    train-rmse:0.226891 
+## [113]    train-rmse:0.225383 
+## [114]    train-rmse:0.223347 
+## [115]    train-rmse:0.222462 
+## [116]    train-rmse:0.219371 
+## [117]    train-rmse:0.216784 
+## [118]    train-rmse:0.213923 
+## [119]    train-rmse:0.211518 
+## [120]    train-rmse:0.208543 
+## [121]    train-rmse:0.207334 
+## [122]    train-rmse:0.206497 
+## [123]    train-rmse:0.205929 
+## [124]    train-rmse:0.201403 
+## [125]    train-rmse:0.199694 
+## [126]    train-rmse:0.197094 
+## [127]    train-rmse:0.194529 
+## [128]    train-rmse:0.192421 
+## [129]    train-rmse:0.189329 
+## [130]    train-rmse:0.187777 
+## [131]    train-rmse:0.185517 
+## [132]    train-rmse:0.183585 
+## [133]    train-rmse:0.182636 
+## [134]    train-rmse:0.182394 
+## [135]    train-rmse:0.182214 
+## [136]    train-rmse:0.180579 
+## [137]    train-rmse:0.179656 
+## [138]    train-rmse:0.178946 
+## [139]    train-rmse:0.178125 
+## [140]    train-rmse:0.177232 
+## [141]    train-rmse:0.176552 
+## [142]    train-rmse:0.175672 
+## [143]    train-rmse:0.173688 
+## [144]    train-rmse:0.173256 
+## [145]    train-rmse:0.172489 
+## [146]    train-rmse:0.172160 
+## [147]    train-rmse:0.171569 
+## [148]    train-rmse:0.170235 
+## [149]    train-rmse:0.169845 
+## [150]    train-rmse:0.168789 
+## [151]    train-rmse:0.168375 
+## [152]    train-rmse:0.167607 
+## [153]    train-rmse:0.167422 
+## [154]    train-rmse:0.166957 
+## [155]    train-rmse:0.166045 
+## [156]    train-rmse:0.165517 
+## [157]    train-rmse:0.165054 
+## [158]    train-rmse:0.164035 
+## [159]    train-rmse:0.163609 
+## [160]    train-rmse:0.163569 
+## [161]    train-rmse:0.163437 
+## [162]    train-rmse:0.162774 
+## [163]    train-rmse:0.161641 
+## [164]    train-rmse:0.160421 
+## [165]    train-rmse:0.160076 
+## [166]    train-rmse:0.159900 
+## [167]    train-rmse:0.159597 
+## [168]    train-rmse:0.159435 
+## [169]    train-rmse:0.158923 
+## [170]    train-rmse:0.158658 
+## [171]    train-rmse:0.158063 
+## [172]    train-rmse:0.157670 
+## [173]    train-rmse:0.156804 
+## [174]    train-rmse:0.156680 
+## [175]    train-rmse:0.156062 
+## [176]    train-rmse:0.155900 
+## [177]    train-rmse:0.155539 
+## [178]    train-rmse:0.155157 
+## [179]    train-rmse:0.154894 
+## [180]    train-rmse:0.154571 
+## [181]    train-rmse:0.154229 
+## [182]    train-rmse:0.153831 
+## [183]    train-rmse:0.153294 
+## [184]    train-rmse:0.153118 
+## [185]    train-rmse:0.153010 
+## [186]    train-rmse:0.152747 
+## [187]    train-rmse:0.152608 
+## [188]    train-rmse:0.152443 
+## [189]    train-rmse:0.152268 
+## [190]    train-rmse:0.152187 
+## [191]    train-rmse:0.152113 
+## [192]    train-rmse:0.152080 
+## [193]    train-rmse:0.151849 
+## [194]    train-rmse:0.151824 
+## [195]    train-rmse:0.151518 
+## [196]    train-rmse:0.151408 
+## [197]    train-rmse:0.151108 
+## [198]    train-rmse:0.150927 
+## [199]    train-rmse:0.150765 
+## [200]    train-rmse:0.150601 
+## [201]    train-rmse:0.150519 
+## [202]    train-rmse:0.150249 
+## [203]    train-rmse:0.150207 
+## [204]    train-rmse:0.150043 
+## [205]    train-rmse:0.149787 
+## [206]    train-rmse:0.149570 
+## [207]    train-rmse:0.149367 
+## [208]    train-rmse:0.149296 
+## [209]    train-rmse:0.149103 
+## [210]    train-rmse:0.148973 
+## [211]    train-rmse:0.148853 
+## [212]    train-rmse:0.148664 
+## [213]    train-rmse:0.148572 
+## [214]    train-rmse:0.148524 
+## [215]    train-rmse:0.148452 
+## [216]    train-rmse:0.148355 
+## [217]    train-rmse:0.148305 
+## [218]    train-rmse:0.148156 
+## [219]    train-rmse:0.148009 
+## [220]    train-rmse:0.147962 
+## [221]    train-rmse:0.147828 
+## [222]    train-rmse:0.147725 
+## [223]    train-rmse:0.147691 
+## [224]    train-rmse:0.147659 
+## [225]    train-rmse:0.147581 
+## [226]    train-rmse:0.147494 
+## [227]    train-rmse:0.147435 
+## [228]    train-rmse:0.147333 
+## [229]    train-rmse:0.147206 
+## [230]    train-rmse:0.147068 
+## [231]    train-rmse:0.146967 
+## [232]    train-rmse:0.146852 
+## [233]    train-rmse:0.146848 
+## [234]    train-rmse:0.146840 
+## [235]    train-rmse:0.146839 
+## [236]    train-rmse:0.146833 
+## [237]    train-rmse:0.146803 
+## [238]    train-rmse:0.146725 
+## [239]    train-rmse:0.146660 
+## [240]    train-rmse:0.146599 
+## [241]    train-rmse:0.146559 
+## [242]    train-rmse:0.146514 
+## [243]    train-rmse:0.146492 
+## [244]    train-rmse:0.146460 
+## [245]    train-rmse:0.146443 
+## [246]    train-rmse:0.146407 
+## [247]    train-rmse:0.146379 
+## [248]    train-rmse:0.146329 
+## [249]    train-rmse:0.146284 
+## [250]    train-rmse:0.146229 
+## [251]    train-rmse:0.146209 
+## [252]    train-rmse:0.146173 
+## [253]    train-rmse:0.146136 
+## [254]    train-rmse:0.146077 
+## [255]    train-rmse:0.146009 
+## [256]    train-rmse:0.145993 
+## [257]    train-rmse:0.145955 
+## [258]    train-rmse:0.145944 
+## [259]    train-rmse:0.145920 
+## [260]    train-rmse:0.145894 
+## [261]    train-rmse:0.145882 
+## [262]    train-rmse:0.145872 
+## [263]    train-rmse:0.145872 
+## [264]    train-rmse:0.145855 
+## [265]    train-rmse:0.145841 
+## [266]    train-rmse:0.145820 
+## [267]    train-rmse:0.145811 
+## [268]    train-rmse:0.145798 
+## [269]    train-rmse:0.145783 
+## [270]    train-rmse:0.145769 
+## [271]    train-rmse:0.145750 
+## [272]    train-rmse:0.145716 
+## [273]    train-rmse:0.145705 
+## [274]    train-rmse:0.145696 
+## [275]    train-rmse:0.145696 
+## [276]    train-rmse:0.145676 
+## [277]    train-rmse:0.145674 
+## [278]    train-rmse:0.145667 
+## [279]    train-rmse:0.145663 
+## [280]    train-rmse:0.145661 
+## [281]    train-rmse:0.145644 
+## [282]    train-rmse:0.145640 
+## [283]    train-rmse:0.145638 
+## [284]    train-rmse:0.145635 
+## [285]    train-rmse:0.145627 
+## [286]    train-rmse:0.145622 
+## [287]    train-rmse:0.145620 
+## [288]    train-rmse:0.145617 
+## [289]    train-rmse:0.145608 
+## [290]    train-rmse:0.145605 
+## [291]    train-rmse:0.145598 
+## [292]    train-rmse:0.145589 
+## [293]    train-rmse:0.145586 
+## [294]    train-rmse:0.145564 
+## [295]    train-rmse:0.145554 
+## [296]    train-rmse:0.145543 
+## [297]    train-rmse:0.145528 
+## [298]    train-rmse:0.145504 
+## [299]    train-rmse:0.145494 
+## [300]    train-rmse:0.145478</code></pre>
+<pre class="r"><code>print(xgb1)</code></pre>
+<pre><code>## ##### xgb.Booster
+## raw: 6.4 Mb 
+## call:
+##   xgb.train(params = params, data = dtrain, nrounds = nrounds, 
+##     watchlist = watchlist, verbose = verbose, print_every_n = print_every_n, 
+##     early_stopping_rounds = early_stopping_rounds, maximize = maximize, 
+##     save_period = save_period, save_name = save_name, xgb_model = xgb_model, 
+##     callbacks = callbacks, max.depth = 10)
+## params (as set within xgb.train):
+##   max_depth = &quot;10&quot;, validate_parameters = &quot;1&quot;
+## xgb.attributes:
+##   niter
+## callbacks:
+##   cb.print.evaluation(period = print_every_n)
+##   cb.evaluation.log()
+## # of features: 24 
+## niter: 300
+## nfeatures : 24 
+## evaluation_log:
+##     iter train_rmse
+##        1  5.3089952
+##        2  3.8582693
+## ---                
+##      299  0.1454936
+##      300  0.1454778</code></pre>
+</div>
+<div id="model-prediction" class="section level4">
+<h4>model prediction</h4>
+<pre class="r"><code>pred_y = predict(xgb1, dtest)</code></pre>
+<pre class="r"><code>mse = mean((data_testy$label - pred_y)^2)
+mae = caret::MAE(data_testy$label, pred_y)
+rmse = caret::RMSE(data_testy$label, pred_y)
+
+cat(&quot;MSE: &quot;, mse, &quot;MAE: &quot;, mae, &quot; RMSE: &quot;, rmse)</code></pre>
+<pre><code>## MSE:  2.843923 MAE:  1.289155  RMSE:  1.686394</code></pre>
+<pre class="r"><code>par(mfrow = c(1,1))
+x = 1:length(data_testy$label)
+plot(x, data_testy$label, col = &quot;red&quot;, type = &quot;l&quot;)
+lines(x, pred_y, col = &quot;blue&quot;, type = &quot;l&quot;)</code></pre>
+<p><img src="Exploratory-Analysis_files/figure-html/unnamed-chunk-29-1.png" width="90%" /></p>
+<pre class="r"><code># legend(x = 1, y = 38,  legend = c(&quot;original test_y&quot;, &quot;predicted test_y&quot;), 
+#        col = c(&quot;red&quot;, &quot;blue&quot;), box.lty = 1, cex = 0.8, lty = c(1, 1))</code></pre>
+<pre class="r"><code>names = dimnames(as.matrix(data_testx))[[2]]
+importance_matrix = xgb.importance(names, model = xgb1)
+xgb.plot.importance(importance_matrix[1:10,])</code></pre>
+<p><img src="Exploratory-Analysis_files/figure-html/unnamed-chunk-30-1.png" width="90%" /></p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
